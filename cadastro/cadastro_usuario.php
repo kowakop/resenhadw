@@ -15,7 +15,7 @@
     <!-- teste git -->
     Data de nascimento:
     <br>
-    <input type="date" name="data">
+    <input type="date" name="nascimento">
     <br><br>
 
     E-mail:
