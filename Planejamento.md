@@ -8,6 +8,7 @@
 - FOTO apenas
 - nome de usuário, nome completo, data de nascimento, E-mail, senha 
 - mostrar senha com javascript
+
 # Pagina inicial
 - resenhas mais recentes, no começo, conforme for descendo vai tendo outras categorias 
 - menu ao lado 
@@ -87,3 +88,10 @@
 	- poder ordenar resenhistas por ordem alfabética, mais resenhas escritas, mais favoritados
 
  ### forma de avaliação de resenhas (like, estrelas)
+
+
+### A FAZER:
+
+Form da resenha 
+Form do autor
+Form da obra 
