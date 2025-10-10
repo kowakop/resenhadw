@@ -6,7 +6,7 @@
     <title>Login</title>
 </head>
 <body>
-    <form action="salvar_autor.php" method=''>
+    <form action="saida.php" method=''>
 
     Nome de usuário ou E-mail: <br>
     <input type="text" name="nome">
@@ -14,7 +14,7 @@
 
     Senha:
     <br>
-    <input type="text" name="senha">
+    <input type="password" name="senha">
     <br><br>
     
     <input type="submit" value="Salvar">
