@@ -9,7 +9,7 @@
     <form action="saida.php" method='POST'>
 
     Nome de usuário ou E-mail: <br>
-    <input type="text" name="nome" required>
+    <input type="text" name="nick" required>
     <br><br>
 
     Senha:

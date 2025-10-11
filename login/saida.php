@@ -2,20 +2,20 @@
     require_once "../conexao.php";
     session_start();
     
-    $nome = $_POST['nome'];
+    $nick = $_POST['nick'];
     $senha = $_POST['senha'];
     
-    $nome = trim($nome);
+    $nick = trim($nick);
     $senha = trim($senha);
 
-    if ($nome == "" || $senha == "") {
+    if ($nick == "" || $senha == "") {
         "*Você precisa preencher todos os campos";
         header("Location: index.php?e=1");
     }
 
-    $sql = "SELECT * FROM usuario WHERE usuario_nome = ?";
+    $sql = "SELECT * FROM usuario WHERE usuario_nick = ?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, "s", $nome);
+    mysqli_stmt_bind_param($comando, "s", $nick);
     mysqli_stmt_execute($comando);
     $resultado = mysqli_stmt_get_result($comando);
 
@@ -25,7 +25,7 @@
     if ($bd_dados == NULL) {
         $sql = "SELECT * FROM usuario WHERE usuario_email = ?";
         $comando = mysqli_prepare($conexao, $sql);
-        mysqli_stmt_bind_param($comando, "s", $nome);
+        mysqli_stmt_bind_param($comando, "s", $nick);
 
         mysqli_stmt_execute($comando);
         $resultado = mysqli_stmt_get_result($comando);
@@ -48,8 +48,8 @@
 
     $_SESSION["tipo"] = $bd_dados['usuario_tipo'];
     $_SESSION["logado"] = True;
-    $_SESSION["nome"] = $nome;
-    $_SESSION['id'] = $bd_dados['id'];
+    $_SESSION["nick"] = $nick;
+    $_SESSION['id'] = $bd_dados['usuario_id'];
 
     header("Location: ../index.php");
     
