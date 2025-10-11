@@ -3,7 +3,7 @@
 $servidor = "db";
 $usuario = "root";
 $senha = "123";  
-$banco = "resenha";
+$banco = "bd_res_manga";
 
 // isso é uma função que se conecta ao banco
 $conexao = mysqli_connect($servidor, $usuario, $senha, $banco);
