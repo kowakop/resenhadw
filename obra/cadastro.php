@@ -7,7 +7,7 @@
 </head>
 <body>
     
-    <form action="saida.php" method="">
+    <form action="salvar_obra.php" method="">
 
     Nome da obra: <br>
     <input type="text" name="nome"> <br><br>

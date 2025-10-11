@@ -7,35 +7,44 @@
 </head>
 <body>
 <form action="saida.php" method='POST' enctype="multipart/form-data">
+    Nickname:<br>
+    <input type="text" name="nick" required placeholder='Nome único'>
+    <br><br> 
 
-    Username: <br>
-    <input type="text" name="nome">
+    Nome: <br>
+    <input type="text" name="nome" required placeholder='Seu nome'>
     <br><br>
 
     <!-- teste git -->
     Data de nascimento:
     <br>
-    <input type="date" name="nascimento">
+    <input type="date" name="nascimento" required>
     <br><br>
 
     E-mail:
     <br>
-    <input type="text" name="email" placeholder="Informe o seu Email">
+    <input type="text" name="email" placeholder="Informe o seu Email" required>
     <br><br>
     
     Digite sua senha:
     <br>
     
-    <input type="text" name="senha">
+    <input type="text" name="senha" required>
     <br><br>
     
     Selecione sua foto de perfil:
     <br>
     <input type="file" name="foto">
 
-<br><br>
+    <br><br>
 
     <input type="submit" value="Salvar">
+    <br><br>
+
+
+    <?php
+    require_once "../erro_login.php"
+    ?>
     </form>
 </body>
 </html>

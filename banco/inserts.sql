@@ -2,36 +2,39 @@
 -- Inserts para usuario
 -- -------------------------------
 INSERT INTO `bd_res_manga`.`usuario` 
-(`usuario_nome`, `usuario_data_nasc`, `usuario_email`, `usuario_senha`, `usuario_foto`, `usuario_tipo`) VALUES
-('Carlos Silva', '1990-05-20', 'carlos.silva@example.com', 'senha123', 'foto_carlos.jpg', 'user'),
-('Ana Oliveira', '1995-08-15', 'ana.oliveira@example.com', 'senha123', 'foto_ana.jpg', 'user'),
-('Felipe Souza', '1988-12-25', 'felipe.souza@example.com', 'senha123', 'foto_felipe.jpg', 'user'),
-('Beatriz Almeida', '1992-03-12', 'beatriz.almeida@example.com', 'senha123', 'foto_beatriz.jpg', 'user'),
-('Lucas Pereira', '2000-06-30', 'lucas.pereira@example.com', 'senha123', 'foto_lucas.jpg', 'user'),
-('Mariana Costa', '1997-11-11', 'mariana.costa@example.com', 'senha123', 'foto_mariana.jpg', 'user'),
-('José Santos', '1985-01-01', 'jose.santos@example.com', 'senha123', 'foto_jose.jpg', 'user'),
-('Fernanda Ribeiro', '1993-04-07', 'fernanda.ribeiro@example.com', 'senha123', 'foto_fernanda.jpg', 'user'),
-('Ricardo Mendes', '1990-09-18', 'ricardo.mendes@example.com', 'senha123', 'foto_ricardo.jpg', 'user'),
-('Carla Rocha', '1998-07-23', 'carla.rocha@example.com', 'senha123', 'foto_carla.jpg', 'user'),
-('Paulo Barbosa', '1987-02-05', 'paulo.barbosa@example.com', 'senha123', 'foto_paulo.jpg', 'user'),
-('Luana Martins', '1996-09-27', 'luana.martins@example.com', 'senha123', 'foto_luana.jpg', 'user'),
-('Gustavo Costa', '2002-01-16', 'gustavo.costa@example.com', 'senha123', 'foto_gustavo.jpg', 'user'),
-('Juliana Pereira', '1994-11-02', 'juliana.pereira@example.com', 'senha123', 'foto_juliana.jpg', 'user'),
-('Ricardo Lima', '1989-04-13', 'ricardo.lima@example.com', 'senha123', 'foto_ricardo_lima.jpg', 'user'),
-('Isabela Silva', '1991-06-09', 'isabela.silva@example.com', 'senha123', 'foto_isabela.jpg', 'user'),
-('Felipe Oliveira', '1994-01-18', 'felipe.oliveira@example.com', 'senha123', 'foto_felipe_oliveira.jpg', 'user'),
-('Tatiane Sousa', '1983-10-25', 'tatiane.sousa@example.com', 'senha123', 'foto_tatiane.jpg', 'user'),
-('Bruno Gomes', '1992-07-30', 'bruno.gomes@example.com', 'senha123', 'foto_bruno.jpg', 'user'),
-('Marcos Ferreira', '1980-03-16', 'marcos.ferreira@example.com', 'senha123', 'foto_marcos.jpg', 'user'),
-('Vanessa Lima', '1999-02-22', 'vanessa.lima@example.com', 'senha123', 'foto_vanessa.jpg', 'user'),
-('Renato Oliveira', '1986-11-14', 'renato.oliveira@example.com', 'senha123', 'foto_renato.jpg', 'user'),
-('Lúcia Costa', '1995-07-28', 'lucia.costa@example.com', 'senha123', 'foto_lucia.jpg', 'user'),
-('Sérgio Martins', '2001-12-04', 'sergio.martins@example.com', 'senha123', 'foto_sergio.jpg', 'user'),
-('Roberta Almeida', '1993-03-17', 'roberta.almeida@example.com', 'senha123', 'foto_roberta.jpg', 'user'),
-('Edson Lima', '1987-08-03', 'edson.lima@example.com', 'senha123', 'foto_edson.jpg', 'user'),
-('Gabriela Souza', '1999-10-18', 'gabriela.souza@example.com', 'senha123', 'foto_gabriela.jpg', 'user'),
-('Simone Rocha', '1990-09-04', 'simone.rocha@example.com', 'senha123', 'foto_simone.jpg', 'user'),
-('Gustavo Almeida', '1996-11-01', 'gustavo.almeida@example.com', 'senha123', 'foto_gustavo_almeida.jpg', 'user');
+(`usuario_nick`, `usuario_nome`, `usuario_data_nasc`, `usuario_email`, `usuario_senha`, `usuario_foto`, `usuario_tipo`) VALUES
+('Carlos', 'Carlos Silva', '1990-05-20', 'carlos.silva@example.com', 'senha123', 'foto_carlos.jpg', 'comum'),
+('Ana', 'Ana Oliveira', '1995-08-15', 'ana.oliveira@example.com', 'senha123', 'foto_ana.jpg', 'comum'),
+('Felipe', 'Felipe Souza', '1988-12-25', 'felipe.souza@example.com', 'senha123', 'foto_felipe.jpg', 'comum'),
+('Beatriz', 'Beatriz Almeida', '1992-03-12', 'beatriz.almeida@example.com', 'senha123', 'foto_beatriz.jpg', 'comum'),
+('Lucas', 'Lucas Pereira', '2000-06-30', 'lucas.pereira@example.com', 'senha123', 'foto_lucas.jpg', 'comum'),
+('Mariana', 'Mariana Costa', '1997-11-11', 'mariana.costa@example.com', 'senha123', 'foto_mariana.jpg', 'comum'),
+('José', 'José Santos', '1985-01-01', 'jose.santos@example.com', 'senha123', 'foto_jose.jpg', 'comum'),
+('Fernanda', 'Fernanda Ribeiro', '1993-04-07', 'fernanda.ribeiro@example.com', 'senha123', 'foto_fernanda.jpg', 'comum'),
+('Ricardo', 'Ricardo Mendes', '1990-09-18', 'ricardo.mendes@example.com', 'senha123', 'foto_ricardo.jpg', 'comum'),
+('Carla', 'Carla Rocha', '1998-07-23', 'carla.rocha@example.com', 'senha123', 'foto_carla.jpg', 'comum'),
+('Paulo', 'Paulo Barbosa', '1987-02-05', 'paulo.barbosa@example.com', 'senha123', 'foto_paulo.jpg', 'comum'),
+('Luana', 'Luana Martins', '1996-09-27', 'luana.martins@example.com', 'senha123', 'foto_luana.jpg', 'comum'),
+('Gustavo', 'Gustavo Costa', '2002-01-16', 'gustavo.costa@example.com', 'senha123', 'foto_gustavo.jpg', 'comum'),
+('Juliana', 'Juliana Pereira', '1994-11-02', 'juliana.pereira@example.com', 'senha123', 'foto_juliana.jpg', 'comum'),
+('RicardoL', 'Ricardo Lima', '1989-04-13', 'ricardo.lima@example.com', 'senha123', 'foto_ricardo_lima.jpg', 'comum'),
+('Isabela', 'Isabela Silva', '1991-06-09', 'isabela.silva@example.com', 'senha123', 'foto_isabela.jpg', 'comum'),
+('FelipeO', 'Felipe Oliveira', '1994-01-18', 'felipe.oliveira@example.com', 'senha123', 'foto_felipe_oliveira.jpg', 'comum'),
+('Tatiane', 'Tatiane Sousa', '1983-10-25', 'tatiane.sousa@example.com', 'senha123', 'foto_tatiane.jpg', 'comum'),
+('Bruno', 'Bruno Gomes', '1992-07-30', 'bruno.gomes@example.com', 'senha123', 'foto_bruno.jpg', 'comum'),
+('Marcos', 'Marcos Ferreira', '1980-03-16', 'marcos.ferreira@example.com', 'senha123', 'foto_marcos.jpg', 'comum'),
+('Vanessa', 'Vanessa Lima', '1999-02-22', 'vanessa.lima@example.com', 'senha123', 'foto_vanessa.jpg', 'comum'),
+('Renato', 'Renato Oliveira', '1986-11-14', 'renato.oliveira@example.com', 'senha123', 'foto_renato.jpg', 'comum'),
+('Lúcia', 'Lúcia Costa', '1995-07-28', 'lucia.costa@example.com', 'senha123', 'foto_lucia.jpg', 'comum'),
+('Sérgio', 'Sérgio Martins', '2001-12-04', 'sergio.martins@example.com', 'senha123', 'foto_sergio.jpg', 'comum'),
+('Roberta', 'Roberta Almeida', '1993-03-17', 'roberta.almeida@example.com', 'senha123', 'foto_roberta.jpg', 'comum'),
+('Edson', 'Edson Lima', '1987-08-03', 'edson.lima@example.com', 'senha123', 'foto_edson.jpg', 'comum'),
+('Gabriela', 'Gabriela Souza', '1999-10-18', 'gabriela.souza@example.com', 'senha123', 'foto_gabriela.jpg', 'comum'),
+('Simone', 'Simone Rocha', '1990-09-04', 'simone.rocha@example.com', 'senha123', 'foto_simone.jpg', 'comum'),
+('GustavoA', 'Gustavo Almeida', '1996-11-01', 'gustavo.almeida@example.com', 'senha123', 'foto_gustavo_almeida.jpg', 'comum'),
+('admin', 'Administrador', '1996-11-01', 'admin@example.com', 'admin', 'foto_gustavo_almeida.jpg', 'admin');
+
+
 
 -- -------------------------------
 -- Inserts para autor
@@ -121,12 +124,13 @@ INSERT INTO `bd_res_manga`.`resenha`
 -- Inserts para favorito
 -- -------------------------------
 INSERT INTO `bd_res_manga`.`favorito`
-(`favorito_obra_id`, `favorito_autor_id`, `favorito_resenhista_id`, `favorito_usuario_id`) VALUES
-(1, NULL, NULL, 2),
-(NULL, NULL, 2, 1),
-(3, NULL, NULL, 4),
-(NULL, 4, NULL, 5),
-(NULL, 24, NULL, 6);
+(`favorito_usuario_id`, `favorito_tipo`, `favorito_id`) VALUES
+(2, 'OB', 1), 
+(1, 'RE', 2),
+(4, 'OB', 3), 
+(5, 'AU', 4),     
+(6, 'AU', 24);  
+
 
 -- -------------------------------
 -- Inserts para like
