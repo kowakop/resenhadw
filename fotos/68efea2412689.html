@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 30px;
+    }
+    input {
+        width: 210px;
+        height: 40px;
+        font-size: 20px;
+        text-align: right;
+        margin-bottom: 10px;
+    }
+    button {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+        margin: 3px;
+        background-color: gray;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: lightgray;
+        color: black;
+    }
+</style>
+</head>
+<body>
+
+<input type="text" id="display" readonly> <br>
+
+<!-- Linha 1 -->
+<button>7</button>
+<button>8</button>
+<button>9</button>
+<button>/</button> <br>
+
+<!-- Linha 2 -->
+<button>4</button>
+<button>5</button>
+<button>6</button>
+<button>*</button> <br>
+
+<!-- Linha 3 -->
+<button>1</button>
+<button>2</button>
+<button>3</button>
+<button>-</button> <br>
+
+<!-- Linha 4 -->
+<button>0</button>
+<button>C</button>
+<button>=</button>
+<button>+</button>
+
+<script>
+var botoes = document.querySelectorAll('button')
+var display = document.getElementById('display')
+
+for (let x = 0; x < botoes.length; x++) {
+    botoes[x].addEventListener('click', function() {
+        let valor = botoes[x].innerHTML
+        
+        if (valor === 'C') {
+            display.value = ''
+        }
+        else if (valor === '=') {
+            try {
+                display.value = eval(display.value) 
+            } catch {
+                display.value = 'Erro'
+            }
+        }
+        else {
+            display.value += valor
+        }
+    })
+}
+</script>
+
+</body>
+</html>

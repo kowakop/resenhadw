@@ -9,7 +9,6 @@
     $senha = trim($senha);
 
     if ($nick == "" || $senha == "") {
-        "*Você precisa preencher todos os campos";
         header("Location: index.php?e=1");
     }
 
@@ -40,7 +39,6 @@
     }
 
     if ($bd_dados["usuario_senha"] != $senha) {
-        "*Senha incorreta";
         header("Location: index.php?e=11");
     }
 
@@ -50,6 +48,7 @@
     $_SESSION["logado"] = True;
     $_SESSION["nick"] = $nick;
     $_SESSION['id'] = $bd_dados['usuario_id'];
+    $_SESSION['tipo'] = $bd_dados['usuario_tipo'];
 
     header("Location: ../index.php");
     

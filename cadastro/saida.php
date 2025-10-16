@@ -16,7 +16,7 @@
     $tempo = strtotime($nascimento);
     $hoje = time();
 
-    if ($nick == "" || $email == "" || $senha == "" || $nascimento == "" || $nick == "") {
+    if ($nome == "" || $email == "" || $senha == "" || $nascimento == "" || $nick == "") {
         header("Location: index.php?e=1");
     }
     
@@ -78,20 +78,31 @@
         header("Location: index.php?e=13");
     } 
 
-    $nome_arquivo = $_FILES['foto']['name'];
-    $caminho_temporario = $_FILES['foto']['tmp_name'];
 
-    //pegar a extensão do arquivo
-    $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
+    if (!isset($_FILES['foto'])) {
+        $nome_arquivo = $_FILES['foto']['name'];
+        $caminho_temporario = $_FILES['foto']['tmp_name'];
 
-    //gerar um novo nome
-    $novo_nome = uniqid() . "." . $extensao;
+        //pegar a extensão do arquivo
+        $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
 
-    // lembre-se de criar a pasta e de ajustar as permissões.
-    $caminho_destino = "../fotos/" . $novo_nome;
+        $extensoesValidas = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
 
-    // move a foto para o
-    move_uploaded_file($caminho_temporario, $caminho_destino);
+
+        if (in_array(strtolower($extensao), $extensoesValidas)) {
+            //gerar um novo nome
+            $novo_nome = uniqid() . "." . $extensao;
+
+            // lembre-se de criar a pasta e de ajustar as permissões.
+            $caminho_destino = "../fotos/" . $novo_nome;
+
+            // move a foto para o
+            move_uploaded_file($caminho_temporario, $caminho_destino);
+
+        } else {
+            header("Location: index.php?e=15");
+        }
+    }
 
 
     $sql = "INSERT INTO usuario (usuario_nome, usuario_data_nasc, usuario_email, usuario_senha, usuario_foto, usuario_nick) 

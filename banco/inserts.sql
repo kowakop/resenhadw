@@ -109,16 +109,17 @@ INSERT INTO `bd_res_manga`.`obra`
 -- -------------------------------
 INSERT INTO `bd_res_manga`.`resenha`
 (`resenha_titulo`, `resenha_data`, `resenha_conteudo`, `resenha_usuario_id`, `resenha_obra_id`) VALUES
-('Uma jornada épica', '2025-10-01', 'A obra One Piece é um dos maiores mangás de todos os tempos, com uma narrativa envolvente e personagens memoráveis.', 1, 1),
-('O fim de uma era', '2025-10-02', 'Naruto é uma jornada de superação e amizade, com um final emocionante.', 2, 2),
-('O drama de titãs', '2025-09-30', 'Attack on Titan entrega uma história cheia de ação e mistério, com reviravoltas incríveis.', 3, 3),
-('O caçador imbatível', '2025-09-29', 'Hunter x Hunter é uma obra-prima que mistura ação, estratégia e drama de uma forma única.', 4, 4),
-('O poder dos shinigamis', '2025-09-28', 'Bleach é uma combinação perfeita de ação e comédia, com lutas épicas e personagens cativantes.', 5, 5),
-('Basquete no sangue', '2025-09-27', 'Slam Dunk traz uma história de superação e amizade dentro do universo do basquete.', 6, 6),
-('O dragão que nunca morre', '2025-09-26', 'Dragon Ball é uma das obras mais influentes de todos os tempos, com personagens e batalhas inesquecíveis.', 7, 7),
-('Visão futurista', '2025-09-25', 'Akira é um mangá de ficção científica inovador, com um mundo distópico complexo e personagens marcantes.', 8, 8),
-('Amor e magia', '2025-09-24', 'Sailor Moon é uma história de amor, magia e amizade, que ainda conquista corações ao redor do mundo.', 9, 9),
-('A magia da amizade', '2025-09-23', 'Black Clover traz uma narrativa de superação em um mundo onde a magia é tudo.', 10, 10);
+('Uma jornada épica', '2025-10-01 10:00:00', 'A obra One Piece é um dos maiores mangás de todos os tempos, com uma narrativa envolvente e personagens memoráveis.', 1, 1),
+('O fim de uma era', '2025-10-02 14:30:00', 'Naruto é uma jornada de superação e amizade, com um final emocionante.', 2, 2),
+('O drama de titãs', '2025-09-30 18:45:00', 'Attack on Titan entrega uma história cheia de ação e mistério, com reviravoltas incríveis.', 3, 3),
+('O caçador imbatível', '2025-09-29 11:15:00', 'Hunter x Hunter é uma obra-prima que mistura ação, estratégia e drama de uma forma única.', 4, 4),
+('O poder dos shinigamis', '2025-09-28 20:10:00', 'Bleach é uma combinação perfeita de ação e comédia, com lutas épicas e personagens cativantes.', 5, 5),
+('Basquete no sangue', '2025-09-27 09:50:00', 'Slam Dunk traz uma história de superação e amizade dentro do universo do basquete.', 6, 6),
+('O dragão que nunca morre', '2025-09-26 13:00:00', 'Dragon Ball é uma das obras mais influentes de todos os tempos, com personagens e batalhas inesquecíveis.', 7, 7),
+('Visão futurista', '2025-09-25 17:25:00', 'Akira é um mangá de ficção científica inovador, com um mundo distópico complexo e personagens marcantes.', 8, 8),
+('Amor e magia', '2025-09-24 08:40:00', 'Sailor Moon é uma história de amor, magia e amizade, que ainda conquista corações ao redor do mundo.', 9, 9),
+('A magia da amizade', '2025-09-23 15:55:00', 'Black Clover traz uma narrativa de superação em um mundo onde a magia é tudo.', 10, 10);
+
 
 -- -------------------------------
 -- Inserts para favorito

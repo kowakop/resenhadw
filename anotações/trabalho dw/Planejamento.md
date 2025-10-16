@@ -87,3 +87,5 @@
 	- poder ordenar resenhistas por ordem alfabética, mais resenhas escritas, mais favoritados
 
  ### forma de avaliação de resenhas (like, estrelas)
+
+ # Só o admin Admin pode adicionar remover e editar outros admins os admins posteriores não vem outros admins nem adicionam
