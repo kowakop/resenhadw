@@ -39,7 +39,6 @@
     if ($tempo === false) {
         header("Location: index.php?e=6");
     } 
-
     elseif ($tempo > $hoje) {
         header("Location: index.php?e=7");
     } 
@@ -78,41 +77,53 @@
         header("Location: index.php?e=13");
     } 
 
-
-    if (!isset($_FILES['foto'])) {
-        $nome_arquivo = $_FILES['foto']['name'];
-        $caminho_temporario = $_FILES['foto']['tmp_name'];
-
-        //pegar a extensão do arquivo
-        $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
-
-        $extensoesValidas = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
-
-
-        if (in_array(strtolower($extensao), $extensoesValidas)) {
-            //gerar um novo nome
-            $novo_nome = uniqid() . "." . $extensao;
-
-            // lembre-se de criar a pasta e de ajustar as permissões.
-            $caminho_destino = "../fotos/" . $novo_nome;
-
-            // move a foto para o
-            move_uploaded_file($caminho_temporario, $caminho_destino);
-
-        } else {
-            header("Location: index.php?e=15");
-        }
-    }
-
-
-    $sql = "INSERT INTO usuario (usuario_nome, usuario_data_nasc, usuario_email, usuario_senha, usuario_foto, usuario_nick) 
-    VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO usuario (usuario_nome, usuario_data_nasc, usuario_email, usuario_senha, usuario_nick) 
+    VALUES (?, ?, ?, ?, ?)";
 
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'ssssss', $nome, $nascimento, $email, $senha, $novo_nome, $nick);
+    mysqli_stmt_bind_param($comando, 'sssss', $nome, $nascimento, $email, $senha, $nick);
 
     mysqli_stmt_execute($comando);
+    
+
+    if (isset($_FILES['foto'])) {
+        $nome_arquivo = $_FILES['foto']['name'];
+        $caminho_temporario = $_FILES['foto']['tmp_name'];
+    
+        // Pegar a extensão do arquivo
+        $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
+    
+        $extensoesValidas = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
+    
+        if (in_array(strtolower($extensao), $extensoesValidas)) {
+            // Gerar um novo nome
+            $novo_nome = uniqid() . "." . $extensao;
+    
+            // Lembre-se de criar a pasta e ajustar as permissões.
+            $caminho_destino = "../fotos/" . $novo_nome;
+    
+            // Mover o arquivo para o diretório de destino
+            move_uploaded_file($caminho_temporario, $caminho_destino);
+    
+            $sql = "UPDATE usuario SET usuario_foto = ? WHERE usuario_nick = ?";
+            $comando = mysqli_prepare($conexao, $sql);
+    
+            mysqli_stmt_bind_param($comando, 'ss', $novo_nome, $nick);
+    
+            mysqli_stmt_execute($comando);
+        } else {
+            header("Location: ../index.php");
+        }
+    }
+    
+    $_SESSION["tipo"] = $bd_dados['usuario_tipo'];
+    $_SESSION["logado"] = True;
+    $_SESSION["nick"] = $nick;
+    $_SESSION['id'] = $bd_dados['usuario_id'];
+    $_SESSION['tipo'] = $bd_dados['usuario_tipo'];
+
+
 
     mysqli_stmt_close($comando);
 

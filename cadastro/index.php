@@ -73,8 +73,9 @@ else {
     Digite sua senha:
     <br>
     
-    <input type="text" name="senha" required>
-    <br><br>
+    <input type="password" name="senha" id="senha" required> <br>
+    <input type="checkbox" name="" id="mostrar_senha"><span>mostra senha</span> 
+    <br><br>    
     
     Selecione sua foto de perfil:
     <br>
@@ -90,5 +91,21 @@ else {
     require_once "../erro_login.php"
     ?>
     </form>
+    <script> 
+         // puxa os elementos por id
+         const senhaInput = document.getElementById('senha');
+        const mostrarSenhaCheckbox = document.getElementById('mostrar_senha');
+
+        // Adiciona um evento de clique na checkbox
+        mostrarSenhaCheckbox.addEventListener('click', function() {
+            if (mostrarSenhaCheckbox.checked) {
+                // Se a checkbox estiver marcada, mostra a senha
+                senhaInput.type = 'text';
+            } else {
+                // Se a checkbox estiver desmarcada, oculta a senha
+                senhaInput.type = 'password';
+            }
+        });
+    </script>
 </body>
 </html>

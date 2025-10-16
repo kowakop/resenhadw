@@ -1,13 +1,13 @@
 
 # Cadastro Login
-- nomes não podem se repetir impedir isso no banco e na validação
-- impedir qualquer tipo de vulnerabilidade
-- validar todos os dados com Php e sinalizar os tipos e limites com Html
-- não permitir de nenhum modo strings vazias 
-- permitir colocar foto
-- FOTO apenas
-- nome de usuário, nome completo, data de nascimento, E-mail, senha 
-- mostrar senha com javascript
+- nomes não podem se repetir impedir isso no banco e na validação /ok
+- impedir qualquer tipo de vulnerabilidade /+-
+- validar todos os dados com Php e sinalizar os tipos e limites com Html /ok
+- não permitir de nenhum modo strings vazias /ok
+- permitir colocar foto /ok
+- FOTO apenas /ok
+- nome de usuário, nome completo, data de nascimento, E-mail, senha /ok
+- mostrar senha com javascript /ok
 # Pagina inicial
 - resenhas mais recentes, no começo, conforme for descendo vai tendo outras categorias 
 - menu ao lado 

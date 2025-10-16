@@ -14,7 +14,7 @@
 
     Senha:
     <br>
-    <input type="password" name="senha" required><br>
+    <input type="password" name="senha" id="senha" required><br>
     <input type="checkbox" name="" id="mostrar_senha"><span>mostra senha</span> 
     <br><br>
 
@@ -26,6 +26,23 @@
     <input type="submit" value="Logar">
     
     </form>
+
+    <script> 
+         // puxa os elementos por id
+         const senhaInput = document.getElementById('senha');
+        const mostrarSenhaCheckbox = document.getElementById('mostrar_senha');
+
+        // Adiciona um evento de clique na checkbox
+        mostrarSenhaCheckbox.addEventListener('click', function() {
+            if (mostrarSenhaCheckbox.checked) {
+                // Se a checkbox estiver marcada, mostra a senha
+                senhaInput.type = 'text';
+            } else {
+                // Se a checkbox estiver desmarcada, oculta a senha
+                senhaInput.type = 'password';
+            }
+        });
+    </script>
 
 </body>
 </html>
