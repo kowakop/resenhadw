@@ -52,7 +52,7 @@
         header("Location: index.php?e=14");
     }
 
-    $sql = "SELECT usuario_id FROM usuario WHERE usuario_nick = ?";
+    $sql = "SELECT * FROM usuario WHERE usuario_nick = ?";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, "s", $nick);
     mysqli_stmt_execute($comando);
