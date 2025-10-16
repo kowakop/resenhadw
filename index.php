@@ -6,8 +6,8 @@
     <title>Resenhando Mangás</title>
 </head>
 <body>
-    <a href="./login">Logar</a> <br>
-    <a href="./autor">Autor</a> <br>
+    <a href="./login/">Logar</a> <br>
+    <a href="./autor/cadastrar.php">Autor</a> <br>
     <a href="./cadastro">Cadastro</a> <br>
     <a href="./obra">Obras</a> <br>
 </body>

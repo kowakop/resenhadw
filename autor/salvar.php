@@ -4,7 +4,9 @@
     $nome = $_POST['nome'];
     $data_nasc = $_POST['data_nasc'];
     $data_morte = $_POST['data_morte'];
-    $foto = $_POST['foto'];
+    $autor_morto = $_POST['opcao'];
+
+
 
     $nome = trim($nome);
     $data_nasc = trim($data_nasc);
@@ -12,30 +14,52 @@
 
     // para ajustar o tempo
 
-    $tempo = strtotime($data_nasc || $data_morte);
+    $tempo_nasc = strtotime($data_nasc);
+    $tempo_morte = strtotime($data_morte);
     $hoje = time();
 
     // condições em caso do usuário preencher errado
 
-    if ($nome == "" || $data_nasc == "" || $data_morte == "") {
-    header("Location: ../index.php?e=1");
+    if ($nome == "" || $data_nasc == "") {
+    header("Location: cadastrar.php?e=1");
     }
 
-    if ($tempo === false) {
-        header("Location: index.php?e=6");
+    if ($tempo_nasc == false) {
+        header("Location: cadastrar.php?e=6");
     } 
 
-    elseif ($tempo > $hoje) {
-        header("Location: index.php?e=7");
+    elseif ($tempo_nasc > $hoje) {
+        header("Location: cadastrar.php?e=7");
     }
 
     elseif (strlen($nome) > 70){
-        header("Location: index.php?e=14");
+        header("Location: cadastrar.php?e=14");
+    }
+
+    // condição em caso o autor esteja morto
+
+    if ($autor_morto  == "sim") {
+
+        if ($nome == "" || $data_nasc == "") {
+            header("Location: cadastrar.php?e=1");
+        }
+
+        if ($tempo_morte == false) {
+            header("Location: cadastrar.php?e=6");
+        } 
+
+        elseif ($tempo_morte > $hoje) {
+            header("Location: cadastrar.php?e=7");
+        }
+    } 
+
+    else {
+        $data_morte = NULL;
     }
 
     // criando condições para a foto ser salva no banco
 
-    if (!isset($_FILES['foto'])) {
+    if (isset($_FILES['foto'])) {
         $nome_arquivo = $_FILES['foto']['name'];
         $caminho_temporario = $_FILES['foto']['tmp_name'];
 
@@ -56,7 +80,7 @@
             move_uploaded_file($caminho_temporario, $caminho_destino);
 
         } else {
-            header("Location: index.php?e=15");
+            header("Location: cadastrar.php");
         }
     }
 
