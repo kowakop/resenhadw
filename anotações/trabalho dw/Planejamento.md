@@ -4,10 +4,10 @@
 - impedir qualquer tipo de vulnerabilidade
 - validar todos os dados com Php e sinalizar os tipos e limites com Html
 - não permitir de nenhum modo strings vazias 
-- permitir colocar foto -> **FEITO**
-- FOTO apenas -> **FEITO**
+- permitir colocar foto
+- FOTO apenas
 - nome de usuário, nome completo, data de nascimento, E-mail, senha 
-- mostrar senha com javascript -> **FEITO**
+- mostrar senha com javascript
 # Pagina inicial
 - resenhas mais recentes, no começo, conforme for descendo vai tendo outras categorias 
 - menu ao lado 
