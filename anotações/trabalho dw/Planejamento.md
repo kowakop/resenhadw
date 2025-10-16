@@ -4,10 +4,10 @@
 - impedir qualquer tipo de vulnerabilidade
 - validar todos os dados com Php e sinalizar os tipos e limites com Html
 - não permitir de nenhum modo strings vazias 
-- permitir colocar foto
-- FOTO apenas
+- permitir colocar foto -> **FEITO**
+- FOTO apenas -> **FEITO**
 - nome de usuário, nome completo, data de nascimento, E-mail, senha 
-- mostrar senha com javascript
+- mostrar senha com javascript -> **FEITO**
 # Pagina inicial
 - resenhas mais recentes, no começo, conforme for descendo vai tendo outras categorias 
 - menu ao lado 
@@ -23,6 +23,7 @@
 	- editar e excluir as próprias resenhas 
 	- editar o próprio perfil 
 	- favoritar 
+
 - Admin :
 	-  não cria resenhas mas pode excluir qualquer resenhas 
 	- não possui perfil mas pode excluir  qualquer usuário
@@ -63,6 +64,7 @@
 - autor (com link pra pagina do autor)
 - resenhas mais recentes da obra
 - quantos usuários favoritaram essa obra
+
 # Cadastrar novas Obras 
 - Titulo
 - ano de publicação
