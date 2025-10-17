@@ -1,5 +1,8 @@
 <?php
 
+    session_start();
+    session_destroy();
+
     require_once "../conexao.php";
     $nome = $_POST['nome'];
     $nick = $_POST['nick'];

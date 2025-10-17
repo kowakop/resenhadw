@@ -58,14 +58,7 @@ if (isset($_GET['e']) && $_GET['e'] != NULL) {
     else if ($erro == 14){
         echo "*Nome não pode ser maior que 70 caracteres abrevie algum sobrenome";
     }
-<<<<<<< HEAD
-    
-    else if ($erro == 15){
-        echo "*O arquivo não é uma imagem";
-    }
 
-=======
->>>>>>> 4735bb1 (putz)
 
     echo "</span>";
     echo '<style>
