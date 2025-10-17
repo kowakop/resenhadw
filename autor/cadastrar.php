@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<a href="index.php">Voltar</a> <br><br>
+<a href="../index.php">Voltar</a> <br><br>
 
 <form action="salvar.php" method="POST" enctype="multipart/form-data">
 
