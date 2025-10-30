@@ -1,5 +1,5 @@
 <?php
-require_once "../verificar_user.php"
+  //require_once "../verificar_user.php"
 ?>
 
 <!DOCTYPE html>
@@ -7,7 +7,7 @@ require_once "../verificar_user.php"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Resenha</title>
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 </head>
 <body>

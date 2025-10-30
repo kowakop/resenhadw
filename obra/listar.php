@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Obras disponíveis</title>
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -11,7 +11,7 @@
     <a href="index.php">Voltar</a>
     <?php
     require_once "../conexao.php";
-    require_once "../verificar_user.php";
+    //require_once "../verificar_user.php";
     $sql = "SELECT obra_id, obra_nome, obra_data_inicio, obra_data_final, obra_qtd_capitulos, obra_qtd_volumes, obra_autor_id FROM obra";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_execute($comando);

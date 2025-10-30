@@ -1,0 +1,32 @@
+#base_menu {
+    background-color: rgb(189, 188, 182);
+    width: 25%;
+}
+
+#logo_menu a {
+    height: 10%;
+    width: 5%;
+    align-items: center;
+    display: flex;
+    gap: 0,2rem;
+}
+
+#logo, #logo2 {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#logo_menu button {
+    margin-left: auto;
+    border: none;
+    cursor: pointer;
+}
+
+.link_menu {
+    color: black;
+    text-decoration: none;
+}
+
+.link_menu :hover {
+    background-color: aqua;
+}
