@@ -38,7 +38,7 @@ Foto do autor: <br>
 <br><br>
 
 Listagem de Autores: <br>
-<a href="listar.php">Listagem</a>
+<a href="listar.php">Confira a listagem de autores já cadastrados!</a>
 
 <?php
 require_once "../erro_login.php"

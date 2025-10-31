@@ -86,12 +86,26 @@
 
     // inserindo no banco
 
-    $sql = "INSERT INTO autor (autor_nome, autor_data_nasc, autor_data_morte, autor_foto) 
-    VALUES (?, ?, ?, ?)";
+    if ($id == 0) {
+        //novo
+        $sql = "INSERT INTO autor (autor_nome, autor_data_nasc, autor_data_morte, autor_foto) VALUES (?, ?, ?, ?)";
+
+        $comando = mysqli_prepare($conexao, $sql);
+        
+        mysqli_stmt_bind_param($comando, 'ssss', $nome, $data_nasc, $data_morte, $novo_nome);
+    }
+
+    else {
+        //editar
+        $sql = "UPDATE autor SET autor_nome = ?, autor_data_nasc = ?, autor_data_morte = ?, autor_foto = ? WHERE autor_id = ?";
+        
+        $comando = mysqli_prepare($conexao, $sql);
+
+        mysqli_stmt_bind_param($comando, 'ssssi', $nome, $data_nasc, $data_morte, $novo_nome, $id);
+
+    }
 
     $comando = mysqli_prepare($conexao, $sql);
-    
-    mysqli_stmt_bind_param($comando, 'ssss', $nome, $data_nasc, $data_morte, $novo_nome);
 
     mysqli_stmt_execute($comando);
 
