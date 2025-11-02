@@ -69,19 +69,19 @@
                 </div>
             </div>
 
-            <a href="./obra/index.php" class="link_menu">
+            <a href="./listar.php?objeto=obra" class="link_menu">
                 <div>
                     <div>Obras</div>
                 </div>
             </a>
 
-            <a href="./resenha/listar.php" class="link_menu">
+            <a href="./listar.php?objeto=resenha" class="link_menu">
                 <div>
                     <div>Resenhas</div>
                 </div>
             </a>
 
-            <a href="./autor/index.php" class="link_menu">
+            <a href="./listar.php?objeto=autor" class="link_menu">
                 <div>
                     <div>Autores</div>
                 </div>
