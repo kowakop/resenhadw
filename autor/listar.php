@@ -96,7 +96,7 @@ $resultado = mysqli_query($conexao, $sql);
 
             $nascimento = date('d/m/Y', strtotime($autor["autor_data_nasc"]));
 
-            echo '<a href="pagina.php?id=' . $autor['autor_id'] . '">';
+            echo '<a href="pagina.php?id=' . $autor['autor_id'] . '" target="_top">';
             echo '<div class="autor">';
             echo '<img src="' . $arquivo . '" alt="foto do autor">';
             echo '<p>' . htmlspecialchars($autor['autor_nome']) . '</p>';
