@@ -27,10 +27,10 @@ SELECT
     usuario_foto,
     usuario_nick,
     COUNT(DISTINCT obra_id) AS qtd_obras,
-    COUNT(DISTINCT favorito_id) AS qtd_favoritos
+    COUNT(DISTINCT favorito_usuario_id) AS qtd_favoritos
 FROM usuario
 LEFT JOIN obra ON obra_autor_id = usuario_id
-LEFT JOIN favorito ON favorito_id = usuario_id AND favorito_tipo = 're'
+LEFT JOIN favorito ON favorito_usuario_id = usuario_id AND favorito_tipo = 're'
 GROUP BY usuario_id
 ";
 
@@ -64,11 +64,12 @@ $resultado = mysqli_query($conexao, $sql);
             echo '<a href="pagina.php?id=' . $usuario['usuario_id'] . '" target="_top" style="text-decoration: none; color: black;">';
             echo '<div class="resenha" style="border: 1px solid lightblue; padding: 20px; width: 250px; border-radius: 10px;">';
             echo '<h3>' . $usuario['usuario_nick'] . '</h3>';
-            //echo '<p><strong>Nickname:</strong> ' . $usuario['usuario_nick'] . '</p>';
+            echo '<p><strong>Quantidade de resenhas publicadas:</strong> ' . $usuario['qtd_obras'] . '</p>';
+            echo '<p><strong>' . $usuario['qtd_favoritos'] . ' usuários favoritaram esse resenhista </p></strong>';
             //echo '<p><strong>Obra:</strong> ' . $resenha['obra_nome'] . '</p>';
             //echo '<p>' . nl2br($resenha['resenha_conteudo']) . '</p>';
             echo '</div>';
-            echo "<a/href='../cadastro/index.php?id=" . $usuario['usuario_id'] . "'>editar</a>";
+            //echo "<a/href='../cadastro/index.php?id=" . $usuario['usuario_id'] . "'>editar</a>";
             echo '</a>';
         }
         ?>

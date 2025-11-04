@@ -32,7 +32,7 @@
         $op1 = "Data de início";
         $op2 = "<option value='qtd'>Quantidade de capitulos</option>";
     }
-    elseif ($objeto == 'usuario'){
+    elseif ($objeto == 'resenhista'){
         $palavra = "Resenhistas Cadastrados";
         $op1 = "Maior publicador";
         $op2 = "Mais favoritado";
