@@ -32,8 +32,13 @@
         $op1 = "Data de início";
         $op2 = "<option value='qtd'>Quantidade de capitulos</option>";
     }
+    elseif ($objeto == 'usuario'){
+        $palavra = "Resenhistas Cadastrados";
+        $op1 = "Maior publicador";
+        $op2 = "Mais favoritado";
+    }
     else {
-        header('Location: ./index.php');
+        header('Location: ./resenha/feed.php');
     }
 ?>
 
@@ -44,7 +49,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista</title>
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-  <style>
+<style>
         a {
             color: black;
             text-decoration: none;
@@ -62,7 +67,11 @@
 <body>
     <h2>Lista de <?php echo $palavra; ?></h2>
 
-    <a href="../index.php"><button>Voltar</button></a>
+    <?php
+        $url = "../feed.php";
+        $url = urlencode($url);
+        echo "<a href='./index.php?url=$url' target='principal'>";
+        ?>
     Organizar por:
     <select id='select' onchange="filtrar()">
 

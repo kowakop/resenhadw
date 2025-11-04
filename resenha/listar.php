@@ -51,7 +51,7 @@ $resultado = mysqli_query($conexao, $sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de resenhaes</title>
+    <title>Lista de resenhas</title>
     <style>
         .conteiner {
             display: flex;
@@ -91,7 +91,7 @@ $resultado = mysqli_query($conexao, $sql);
                 $data = "Data não informada";
             }
 
-            echo '<a href="pagina.php?id=' . $resenha['resenha_id'] . '" target="_top" style="text-decoration: none; color: black;">';
+            echo '<a href="pagina.php?id=' . $resenha['resenha_id'] . '" target="principal" style="text-decoration: none; color: black;">';
             echo '<div class="resenha" style="border: 1px solid lightblue; padding: 20px; width: 250px; border-radius: 10px;">';
             echo '<h3>' . $resenha['resenha_titulo'] . '</h3>';
             echo '<p><strong>Data:</strong> ' . $data . '</p>';

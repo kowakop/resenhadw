@@ -84,9 +84,21 @@ else {
 
     <br><br>
 
+    <?php 
+    if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == "admin") {
+        echo "
+        Tipo de usuário: 
+        <select name='tipo' id=''>
+            <option value='comum'>Comum</option>
+            <option value='admin'>Admin</option>
+        </select>
+        ";
+    }
+    ?>
+
     <input type="submit" value="Salvar">
     <br><br>
-
+    
 
     <?php
     require_once "../erro_login.php"

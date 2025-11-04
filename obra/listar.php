@@ -52,50 +52,58 @@ $resultado = mysqli_query($conexao, $sql);
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lista de Obras</title>
-<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-<style>
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px;
-}
-.obra {
-    border: 1px solid lightblue;
-    padding: 20px;
-    width: 240px;
-    text-align: center;
-    border-radius: 10px;
-    background-color: #f7faff;
-    transition: transform 0.2s;
-}
-.obra:hover {
-    transform: scale(1.05);
-}
-img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-bottom: 10px;
-}
-.obra p {
-    margin: 5px 0;
-}
-a {
-    text-decoration: none;
-    color: inherit;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Obras</title>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px;
+        }
+
+        .obra {
+            border: 1px solid lightblue;
+            padding: 20px;
+            width: 240px;
+            text-align: center;
+            border-radius: 10px;
+            background-color: #f7faff;
+            transition: transform 0.2s;
+        }
+
+        .obra:hover {
+            transform: scale(1.05);
+        }
+
+        img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .obra p {
+            margin: 5px 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -107,8 +115,12 @@ while ($obra = mysqli_fetch_assoc($resultado)) {
     //    $arquivo = "../fotos/padrao-autor.png";
     //}
 
-    $inicio = date('d/m/Y', strtotime($obra["obra_data_inicio"]));
-    $final = $obra["obra_data_final"] ? date('d/m/Y', strtotime($obra["obra_data_final"])) : "Em andamento";
+            $inicio = date('d/m/Y', strtotime($obra["obra_data_inicio"]));
+            if ($obra["obra_data_final"]) {
+                $final = date('d/m/Y', strtotime($obra["obra_data_final"]));
+            } else {
+                $final = "Em andamento";
+            }
 
     echo '<a href="pagina.php?id=' . $obra['obra_id'] . '" target="_top">';
     echo '<div class="obra">';
@@ -127,4 +139,5 @@ while ($obra = mysqli_fetch_assoc($resultado)) {
 </div>
 
 </body>
+
 </html>

@@ -6,7 +6,7 @@ require_once "../conexao.php";
 <head>
     <meta charset="UTF-8">
     <title>Feed de Resenhas</title>
-    <link rel="stylesheet" href="feed.css">
+    <link rel="stylesheet" href="feed.css"> 
 </head>
 <body>
     <h2>📚 Resenhas Recentes</h2>
@@ -31,7 +31,7 @@ require_once "../conexao.php";
                 $texto = $linha['resenha_texto'] ?? '';
                 $obra = $linha['obra_titulo'] ?? 'Obra desconhecida';
                 $autor = $linha['autor_nome'] ?? 'Autor desconhecido';
-                $foto = !empty($linha['obra_foto']) ? "../fotos/" . $linha['obra_foto'] : "../fotos/padrao.png";
+                $foto = !empty($linha['obra_foto']) ? "../fotos/" . $linha['obra_foto'] : "../fotos/padrao-obra.png";
                 $id = $linha['resenha_id'];
 
                 echo "<div class='resenha'>";
@@ -40,7 +40,7 @@ require_once "../conexao.php";
                 echo "<h4>" . htmlspecialchars($obra) . "</h4>";
                 echo "<p>" . nl2br(htmlspecialchars($texto)) . "</p>";
                 echo "<p class='autor'>👤 " . htmlspecialchars($autor) . "</p>";
-                echo "<a href='ver_resenha.php?id=" . urlencode($id) . "'>Ver mais</a>";
+                echo "<a href='pagina_r.php?id=" . urlencode($id) . "'>Ver mais</a>";
                 echo "</div>";
             }
         } else {
