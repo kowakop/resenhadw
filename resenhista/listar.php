@@ -66,10 +66,8 @@ $resultado = mysqli_query($conexao, $sql);
             echo '<h3>' . $usuario['usuario_nick'] . '</h3>';
             echo '<p><strong>Quantidade de resenhas publicadas:</strong> ' . $usuario['qtd_obras'] . '</p>';
             echo '<p><strong>' . $usuario['qtd_favoritos'] . ' usuários favoritaram esse resenhista </p></strong>';
-            //echo '<p><strong>Obra:</strong> ' . $resenha['obra_nome'] . '</p>';
             //echo '<p>' . nl2br($resenha['resenha_conteudo']) . '</p>';
             echo '</div>';
-            //echo "<a/href='../cadastro/index.php?id=" . $usuario['usuario_id'] . "'>editar</a>";
             echo '</a>';
         }
         ?>
