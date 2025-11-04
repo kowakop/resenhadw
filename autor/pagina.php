@@ -1,5 +1,6 @@
 <?php
 require_once "../conexao.php";
+require_once "../verificar_user.php";
 
 $id = $_GET['id'];
 
@@ -86,13 +87,13 @@ $qtd_resenhas = mysqli_fetch_assoc($resultados_resenhas)['qtd_resenhas'];
         echo "<p>Favoritos: $qtd_favoritos</p>";
         echo "<p>Obras: $qtd_obras</p>";
         echo "<p>Resenhas: $qtd_resenhas</p>";
+        if ($tipo == "admin") {
+            echo "<a href='cadastrar.php?id=$id'>editar</a>";
+        }
         echo "</div>";
     } else {
         echo "Autor não encontrado.";
     }
-
-
-
     ?>
 </body>
 

@@ -1,5 +1,15 @@
 <?php
     require_once "./conexao.php";
+    
+    session_start();
+    if (!isset($_SESSION['id'])) {
+        header('Location: ../login/index.php');
+    } else {
+        $id = $_SESSION['id'];
+        $nome = $_SESSION['nick'];
+        $tipo = $_SESSION['tipo'];
+    }
+    
 
     if (!isset($_GET["objeto"])) {
         header('Location: ./index.php');
@@ -20,7 +30,7 @@
     else if ($objeto == 'obra') {
         $palavra = "Obras Cadastradas";
         $op1 = "Data de início";
-        $op2 = "<option value='./obra/listar.php?filtro=qtd'>Quantidade de capitulos</option>";
+        $op2 = "<option value='qtd'>Quantidade de capitulos</option>";
     }
     else {
         header('Location: ./index.php');
@@ -32,7 +42,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Autores</title>
+    <title>Lista</title>
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
   <style>
         a {
@@ -50,7 +60,7 @@
     </style>
 </head>
 <body>
-    <h2>Lista de <?php echo $palavra; ?> Cadastrados</h2>
+    <h2>Lista de <?php echo $palavra; ?></h2>
 
     <a href="../index.php"><button>Voltar</button></a>
     Organizar por:

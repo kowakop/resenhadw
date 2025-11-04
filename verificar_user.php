@@ -1,10 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION['id'])) {
-    header('Location: ../index.php');
+    header('Location: ../login/index.php');
 } else {
-    $id = $_SESSION['id'];
-    $nome = $_SESSION['nome'];
+    $id_user = $_SESSION['id'];
+    $nick = $_SESSION['nick'];
     $tipo = $_SESSION['tipo'];
 }
 ?>

@@ -1,5 +1,6 @@
 <?php
 require_once "../conexao.php";
+require_once "../verificar_user.php";
 
 if (isset($_GET["filtro"])) {
     $filtro = $_GET["filtro"];
@@ -13,31 +14,32 @@ if (isset($_GET["ordem"]) && $_GET["ordem"] == "invertida") {
     $ordem = "ASC";
 }
 
-// left join junta dados mesmo se o autor não tiver obras ou favoritos
-// group by agrupa as linhas pelo autor para o count
+// left join junta dados mesmo se o resenha não tiver obras ou favoritos
+// group by agrupa as linhas pelo resenha para o count
+// e distinct pra só contar uma vez cada obra ou favorito
 $sql = "
 SELECT 
-    a.autor_id,
-    a.autor_nome,
-    a.autor_data_nasc,
-    a.autor_data_morte,
-    a.autor_foto,
-    COUNT(DISTINCT o.obra_id) AS qtd_obras,
-    COUNT(DISTINCT f.favorito_id) AS qtd_favoritos
-FROM autor a
-LEFT JOIN obra o ON o.obra_autor_id = a.autor_id
-LEFT JOIN favorito f ON f.favorito_id = a.autor_id AND f.favorito_tipo = 'au'
-GROUP BY a.autor_id
+    autor_id,
+    autor_nome,
+    autor_data_nasc,
+    autor_data_morte,
+    autor_foto,
+    COUNT(DISTINCT obra_id) AS qtd_obras,
+    COUNT(DISTINCT favorito_id) AS qtd_favoritos
+FROM autor
+LEFT JOIN obra ON obra_autor_id = autor_id
+LEFT JOIN favorito ON favorito_id = autor_id AND favorito_tipo = 'au'
+GROUP BY autor_id
 ";
 
 
 if ($filtro == "data") {
-    $sql .= " ORDER BY a.autor_data_nasc $ordem";
+    $sql .= " ORDER BY autor_data_nasc $ordem";
 } else {
     if ($filtro == "favorito") {
         $sql .= " ORDER BY qtd_favoritos $ordem";
     } else {
-        $sql .= " ORDER BY a.autor_nome $ordem";
+        $sql .= " ORDER BY autor_nome $ordem";
     }
 }
 
