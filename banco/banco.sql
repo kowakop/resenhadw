@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `bd_res_manga`.`autor` (
   `autor_nome` VARCHAR(255) NOT NULL,
   `autor_data_nasc` VARCHAR(45) NOT NULL,
   `autor_data_morte` VARCHAR(45) NULL,
-  `autor_foto` VARCHAR(255) NULL,
+  `autor_foto` VARCHAR(255) NULL DEFAULT 'padrao-autor.png',
   PRIMARY KEY (`autor_id`))
 ENGINE = InnoDB;
 
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `bd_res_manga`.`obra` (
   `obra_qtd_capitulos` INT NOT NULL,
   `obra_qtd_volumes` INT NULL,
   `obra_autor_id` INT NOT NULL,
-  `obra_foto` VARCHAR(255) NULL,
+  `obra_foto` VARCHAR(255) NULL DEFAULT 'padrao-obra.png',
   PRIMARY KEY (`obra_id`),
   INDEX `fk_obra_autor1_idx` (`obra_autor_id` ASC) VISIBLE,
   CONSTRAINT `fk_obra_autor1`

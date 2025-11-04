@@ -59,6 +59,7 @@ $qtd_resenhas = mysqli_fetch_assoc($resultados_resenhas)['qtd_resenhas'];
 </head>
 
 <body>
+    <a href="../listar.php?objeto=autor">voltar</a>
     <?php
 
     if ($autor = mysqli_fetch_assoc($resultados_autor)) {
@@ -68,9 +69,14 @@ $qtd_resenhas = mysqli_fetch_assoc($resultados_resenhas)['qtd_resenhas'];
 
 
         if ($morte != null) {
-            $morte = "Morte:</span> " . date('d/m/Y', strtotime($morte));
+            $morte = strtotime($autor["autor_data_morte"]);
+            if ($morte == false) {
+                $morte = "<span>Vivo</span>";
+            } else {
+                $morte = "Morte: <span>" . date('d/m/Y', $morte) . "</span>";
+            }
         } else {
-            $morte = "Vivo</span>";
+            $morte = "<span>Vivo</span>";
         }
         $arquivo = "../fotos/$foto";
 

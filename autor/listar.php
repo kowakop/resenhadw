@@ -89,16 +89,20 @@ $resultado = mysqli_query($conexao, $sql);
             if (!file_exists($arquivo) || !$foto) {
                 $arquivo = "../fotos/padrao-autor.png";
             }
-
             if ($autor["autor_data_morte"]) {
-                $morte = "Morte: <span>" . date('d/m/Y', strtotime($autor["autor_data_morte"])) . "</span>";
+                $morte = strtotime($autor["autor_data_morte"]);
+                if ($morte == false) {
+                    $morte = "<span>Vivo</span>";
+                } else {
+                    $morte = "Morte: <span>" . date('d/m/Y', $morte) . "</span>";
+                }
             } else {
                 $morte = "<span>Vivo</span>";
             }
 
             $nascimento = date('d/m/Y', strtotime($autor["autor_data_nasc"]));
 
-            echo '<a href="pagina.php?id=' . $autor['autor_id'] . '" target="_top">';
+            echo '<a href="pagina.php?id=' . $autor['autor_id'] . '" target="principal">';
             echo '<div class="autor">';
             echo '<img src="' . $arquivo . '" alt="foto do autor">';
             echo '<p>' . htmlspecialchars($autor['autor_nome']) . '</p>';

@@ -61,54 +61,103 @@ if (!isset($_SESSION['id'])) {
 </head>
 <body>
 
-    <!-- IFRAME à ESQUERDA -->
-    <iframe src="./resenha/feed.php" name="principal" id="principal"></iframe>
-
     <!-- MENU à DIREITA -->
     <div id="base_menu">
         <div id="logo_menu">
-            <a href="resenha/feed.php" target="principal">
+            <?php
+            $url = "resenha/feed.php";
+            $url = urlencode($url);
+            echo "<a href='./index.php?url=$url'>";
+            ?>
                 <img src="./fotos/logo.png" alt="logo Resenhando Mangás" id="logo" style="height: 70px;">
                 <img src="./fotos/Resenhando.png" alt="texto resenhando mangás" id="logo2" style="height: 80px; width: 250px;">
             </a>
         </div>
 
-        <a href="resenha/feed.php" class="link_menu" target="principal">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-home icon" viewBox="0 0 24 24" style="color: currentcolor;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-home icon" viewBox="0 0 24 24" style="color: currentcolor;">
                     <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                     <path d="M9 22V12h6v10"></path>
                 </svg>
+
+        <?php
+        $url = "resenha/feed.php";
+        $url = urlencode($url);
+        echo "<a href='./index.php?url=$url' class='link_menu' >";
+        ?>
             <span class="texto_menu">Home</span>
         </a>
 
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="icon" style="color: currentcolor;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="icon" style="color: currentcolor;">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-        </svg> Salvos blabla adicionar aqui autores resenhas e resenhistas salvos ou seja mais tres links
+        </svg> <br> Salvos <br> blabla adicionar aqui <br> autores <br> resenhas <br> resenhistas salvos <br> ou seja mais tres links <br><br>
 
-
-        <a href="./listar.php?objeto=obra" class="link_menu" target="principal">
-            📖 <span class="texto_menu">Obras</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon" style="color: currentcolor;">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 21 5-5m-4-4 8 8c3-3 1-5 1-5l6-6h2l-6-6v2l-6 6s-2-2-5 1"></path>
+                    </svg>   
+        
+        <?php
+        $url = "listar.php?objeto=obra";
+        $url = urlencode($url);
+        echo "<a href='./index.php?url=$url' class='link_menu' >";
+        ?>
+           
+        <span class="texto_menu">Obras</span>
         </a>
-        <a href="./listar.php?objeto=resenha" class="link_menu" target="principal">
+        
+        <?php
+        $url = "listar.php?objeto=resenha";
+        $url = urlencode($url);
+        echo "<a href='./index.php?url=$url' class='link_menu' >";
+        ?>
             📝 <span class="texto_menu">Todas as resenhas</span>
         </a>
-        <a href="./listar.php?objeto=autor" class="link_menu" target="principal">
+
+        <?php
+        $url = "listar.php?objeto=autor";
+        $url = urlencode($url);
+        echo "<a href='./index.php?url=$url' class='link_menu' >";
+        ?>
             👨‍🎨 <span class="texto_menu">Autores</span>
         </a>
-        <a href="./resenhista/index.php" class="link_menu" target="principal">
+
+        <?php
+        $url = "listar.php?objeto=resenhista";
+        $url = urlencode($url);
+        echo "<a href='./index.php?url=$url' class='link_menu'>";
+        ?>
             🧑‍💻 <span class="texto_menu">Resenhistas</span>
         </a>
-        <a href="./obra/index.php" class="link_menu" target="principal">
+
+        <?php
+        $url = "obra/index.php";
+        $url = urlencode($url);
+        echo "<a href='./index.php?url=$url' class='link_menu' >";
+        ?>
             🔍 <span class="texto_menu">Pesquisar Mangás</span>
         </a>
+
+        <?php
+        $url = "resenha/form_resenha.php";
+        $url = urlencode($url);
+        echo "<a href='./index.php?url=$url' class='link_menu' >";
+        ?>
+            📝 <span class="texto_menu">Nova Resenha</span>
+        </a>
+
 
         <hr>
         <?php
         if ($tipo == "admin") {
+            $url = "obra/cadastrar.php";
+            $url = urlencode($url);
+
+            $url2 = "autor/cadastrar.php";
+            $url2 = urlencode($url2);
+
             echo "
             <div><strong>🔧 ADMIN</strong></div>
-            <a href='./obra/cadastrar.php' class='link_menu' target='principal'>Cadastrar Obras</a>
-            <a href='./autor/cadastrar.php' class='link_menu' target='principal'>Cadastrar Autores</a>
+            <a href='./index.php?url=$url' class='link_menu' >Cadastrar Obras</a>
+            <a href='./index.php?url=$url2' class='link_menu' >Cadastrar Autores</a>
             ";
         }
         ?>
@@ -120,5 +169,11 @@ if (!isset($_SESSION['id'])) {
         <a href="./logout.php" class="link_menu">🚪 Sair</a>
     </div>
 
+        <!-- IFRAME à ESQUERDA -->
+         
+        <?php
+        $url = $_GET['url'] ?? 'resenha/feed.php';
+        echo "<iframe src='$url' name='principal' id='principal'></iframe>";
+        ?>
 </body>
 </html>

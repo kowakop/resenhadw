@@ -78,14 +78,20 @@
 
     if ($bd_dados) {
         header("Location: index.php?e=13");
-    } 
+    }
 
-    $sql = "INSERT INTO usuario (usuario_nome, usuario_data_nasc, usuario_email, usuario_senha, usuario_nick) 
-    VALUES (?, ?, ?, ?, ?)";
+    if (isset($_GET['tipo']) && $_GET['tipo'] == "admin") {
+        $tipo = "admin";
+    } else {
+        $tipo = "comum";
+    }
+
+    $sql = "INSERT INTO usuario (usuario_nome, usuario_data_nasc, usuario_email, usuario_senha, usuario_nick, usuario_tipo) 
+    VALUES (?, ?, ?, ?, ?, ?)";
 
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sssss', $nome, $nascimento, $email, $senha, $nick);
+    mysqli_stmt_bind_param($comando, 'ssssss', $nome, $nascimento, $email, $senha, $nick, $tipo);
 
     mysqli_stmt_execute($comando);
     

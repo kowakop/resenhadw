@@ -37,6 +37,7 @@ $qtd_favoritos = mysqli_fetch_assoc($resultados_fav)['qtd_favoritos'];
     <title>Resenha</title>
 </head>
 <body>
+    <a href="./listar.php">voltar</a>
 <?php
 if ($resenha = mysqli_fetch_assoc($resultados_resenha)) {
     echo "<div class='resenha'>";

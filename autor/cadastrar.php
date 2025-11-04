@@ -51,7 +51,7 @@ else {
 </head>
 <body>
 
-<a href="../index.php">Voltar</a> <br><br>
+<a href="../index.php" target="_top">Voltar</a> <br><br>
 
 <form action="salvar.php" method="POST" enctype="multipart/form-data">
 
@@ -62,8 +62,8 @@ Data de Nascimento: <br>
 <input type="date" name="data_nasc" required value="<?php echo $nascimento ?>"> <br><br>
 
 O autor já morreu? <br>
-<input type="radio" name="opcao" value="sim" <?php if ($morte != null) echo "checked"; ?>> Sim
-<input type="radio" name="opcao" value="nao" <?php if ($morte == null) echo "checked"; ?>> Não
+<input type="radio" name="opcao" value="sim" <?php if ($morte != "" && $morte != null) echo "checked"; ?>> Sim
+<input type="radio" name="opcao" value="nao" <?php if ($morte != "" && $morte == null) echo "checked"; ?>> Não
 <br><br>
 
 Data da morte: <br>Editar
