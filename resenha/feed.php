@@ -40,7 +40,7 @@ require_once "../conexao.php";
                 echo "<h4>" . htmlspecialchars($obra) . "</h4>";
                 echo "<p>" . nl2br(htmlspecialchars($texto)) . "</p>";
                 echo "<p class='autor'>👤 " . htmlspecialchars($autor) . "</p>";
-                echo "<a href='pagina_r.php?id=" . urlencode($id) . "'>Ver mais</a>";
+                echo "<a href='pagina.php?id=" . urlencode($id) . "'>Ver mais</a>";
                 echo "</div>";
             }
         } else {
