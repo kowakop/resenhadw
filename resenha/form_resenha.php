@@ -1,5 +1,5 @@
 <?php
-require_once "../verificar_user.php";
+require_once "../conexao.php";
 require_once "../verificar_user.php";
 
 if (isset($_SESSION['tipo'])) {
@@ -55,35 +55,58 @@ if (isset($_SESSION['tipo'])) {
 
 <body>
   <h2>Nova resenha</h2>
-  <form action="criar_post.php" method="post" enctype="multipart/form-data">
+  <form action="salvar.php" method="post" enctype="multipart/form-data">
 
     Obra Resenhada: <br>
-    <select name="autor" required>
+    <select name="autor" required onchange="mostrar()" id="select">
       <?php
       $sql = "SELECT * FROM obra";
-
       $comando = mysqli_prepare($conexao, $sql);
       mysqli_stmt_execute($comando);
       $resultados = mysqli_stmt_get_result($comando);
 
-      while ($obra = mysqli_fetch_assoc($resultados)) {
-        $nome = $obra['obra_nome'];
-        $id_obra = $obra['obra_id'];
-        $foto = $obra['obra_foto'];
+      while ($obraItem = mysqli_fetch_assoc($resultados)) {
+        $nome = $obraItem['obra_nome'];
+        $id_obra = $obraItem['obra_id'];
+        $foto = $obraItem['obra_foto'];
 
-        echo "<option value='$id_obra'";
-        if ($id_obra == $id) {
-          echo "selected";
+        echo "<option value='$id_obra' data-foto='$foto'";
+        if ($id_obra == $obra) {
+          echo " selected";
         }
         echo ">$nome</option>";
       }
       ?>
     </select> <br><br>
-    
-    <textarea name="conteudo" placeholder="Escreva algo... (emojis vão ser suportados, não sei como)" required></textarea>
+
+    <img src="#" alt="" id="foto_obra" style="max-width:200px;">
+    <h2 id="nome_obra"></h2>
+
+    <br><br>
+
+    Título: <br>
+    <input type="text" name="titulo" value="<?php echo htmlspecialchars($titulo); ?>" required>
+    <br><br><br>
+
+    <textarea name="conteudo" placeholder="Escreva algo... (emojis vão ser suportados)" required><?php echo htmlspecialchars($conteudo); ?></textarea>
+    <br><br>
+
     <button type="submit">Publicar</button>
 
   </form>
-</body>
 
-</html>
+  <script>
+    var select = document.getElementById('select');
+    var foto_obra = document.getElementById('foto_obra');
+    var nome_obra = document.getElementById('nome_obra');
+
+    function mostrar() {
+      var opcaoSelecionada = select.options[select.selectedIndex];
+      var foto = opcaoSelecionada.getAttribute('data-foto');
+      foto_obra.src = "../fotos/" + foto;
+      nome_obra.innerText = opcaoSelecionada.text;
+    }
+
+
+  </script>
+</body>
