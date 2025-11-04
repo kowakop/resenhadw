@@ -16,19 +16,18 @@ if (isset($_GET["ordem"]) && $_GET["ordem"] == "invertida") {
 
 $sql = "
 SELECT 
-    obra.obra_id,
-    obra.obra_nome,
-    obra.obra_data_inicio,
-    obra.obra_data_final,
-    obra.obra_qtd_capitulos,
-    obra.obra_qtd_volumes,
-    obra.obra_foto,
+    obra_id,
+    obra_nome,
+    obra_data_inicio,
+    obra_data_final,
+    obra_qtd_capitulos,
+    obra_qtd_volumes,
     autor.autor_nome,
     autor.autor_foto,
     COUNT(DISTINCT favorito.favorito_id) AS qtd_favoritos
 FROM obra
 LEFT JOIN autor 
-    ON obra.obra_autor_id = autor.autor_id
+    ON obra_autor_id = autor_id
 LEFT JOIN favorito 
     ON favorito.favorito_id = obra.obra_id 
     AND favorito.favorito_tipo = 'ob'
@@ -102,18 +101,18 @@ a {
 <div class="container">
 <?php
 while ($obra = mysqli_fetch_assoc($resultado)) {
-    $foto = $obra["obra_foto"];
-    $arquivo = "../fotos/$foto";
-    if (!file_exists($arquivo) || !$foto) {
-        $arquivo = "../fotos/padrao-autor.png";
-    }
+    //$foto = $obra["obra_foto"];
+    //$arquivo = "../fotos/$foto";
+    //if (!file_exists($arquivo) || !$foto) {
+    //    $arquivo = "../fotos/padrao-autor.png";
+    //}
 
     $inicio = date('d/m/Y', strtotime($obra["obra_data_inicio"]));
     $final = $obra["obra_data_final"] ? date('d/m/Y', strtotime($obra["obra_data_final"])) : "Em andamento";
 
     echo '<a href="pagina.php?id=' . $obra['obra_id'] . '" target="_top">';
     echo '<div class="obra">';
-    echo '<img src="' . htmlspecialchars($arquivo) . '" alt="Foto do autor">';
+    //echo '<img src="' . htmlspecialchars($arquivo) . '" alt="Foto do autor">';
     echo '<p><strong>' . htmlspecialchars($obra['obra_nome']) . '</strong></p>';
     echo '<p>Autor: ' . htmlspecialchars($obra['autor_nome'] ?? 'Desconhecido') . '</p>';
     echo '<p>Início: ' . htmlspecialchars($inicio) . '</p>';
