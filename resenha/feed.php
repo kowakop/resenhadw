@@ -14,11 +14,11 @@ require_once "../conexao.php";
     <div class="feed">
         <?php
         $sql = "SELECT 
-                    r.*,
+                    *,
                     o.obra_nome AS obra_titulo,
                     o.obra_foto AS obra_foto,
                     a.autor_nome AS autor_nome
-                FROM resenha r
+                FROM resenha
                 LEFT JOIN obra o ON resenha_obra_id = obra_id
                 LEFT JOIN autor a ON obra_autor_id = autor_id
                 ORDER BY resenha_id DESC";
