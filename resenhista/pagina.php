@@ -175,6 +175,9 @@ $qtd_resenhas = mysqli_fetch_assoc($resultados_resenhas)['qtd_resenhas'];
             echo"<div class='sidebar'>";
                 echo"<img src='$arquivo'>";
                 echo"<button>Favoritar</button>";
+                if ($_SESSION['tipo'] == 'admin' || $_SESSION['id'] == $usuario['usuario_id']) {
+                  echo "<button><a href='cadastrar.php?id=" . $usuario['usuario_id'] . "'>Editar perfil </button></a>";
+                }
             echo"</div>";
 
             echo"<div class='content'>";
@@ -220,13 +223,34 @@ $qtd_resenhas = mysqli_fetch_assoc($resultados_resenhas)['qtd_resenhas'];
         //echo "<p><span>Data de nascimento:</span> " . date('d/m/Y', strtotime($usuario['usuario_data_nasc'])) . "</span></p>";
         //echo "<p>Favoritos: $qtd_favoritos</p>";
         //echo "<p>Resenhas: $qtd_resenhas</p>";
-        if ($tipo == "comum") {
-            echo "<a href='cadastrar.php?id=$id'>editar</a>";
-        }
-        echo "</div>";
-    } else {
-        echo "Autor não encontrado.";
-    }
-    ?>
+        //if ($tipo == "comum") {
+        //    echo "<a href='cadastrar.php?id=$id'>editar</a>";
+        //}
+        //echo "</div>";
+    //} else {
+    //    echo "Autor não encontrado.";
+    //}
+
+    if (!isset($_SESSION['id']) || !isset($_SESSION['tipo'])) {
+    header("Location: ../index.php");
+    exit;
+}
+
+$id_logado = $_SESSION['id'];       // id do usuário logado
+$tipo_logado = $_SESSION['tipo'];   // tipo do usuário (comum ou admin)
+
+// pega o id que veio da URL
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+// --- SE CHEGOU AQUI, ESTÁ AUTORIZADO ---
+// agora busca as informações do perfil normalmente
+$sql = "SELECT * FROM usuario WHERE usuario_id = ?";
+$stmt = mysqli_prepare($conexao, $sql);
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+$resultado = mysqli_stmt_get_result($stmt);
+$usuario = mysqli_fetch_assoc($resultado);
+}
+?>
 </body>
 </html>
