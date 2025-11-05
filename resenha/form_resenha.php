@@ -83,7 +83,7 @@ if (isset($_SESSION['tipo'])) {
     <h2 id="nome_obra"></h2>
 
     <br><br>
-
+    <!-- dependendo do tamanho do titulo ele vaza do card -->
     Título: <br>
     <input type="text" name="titulo" value="<?php echo htmlspecialchars($titulo); ?>" required>
     <br><br><br>
@@ -106,7 +106,5 @@ if (isset($_SESSION['tipo'])) {
       foto_obra.src = "../fotos/" + foto;
       nome_obra.innerText = opcaoSelecionada.text;
     }
-
-
   </script>
 </body>
