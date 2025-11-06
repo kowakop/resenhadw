@@ -5,6 +5,7 @@
     $data_nasc = $_POST['data_nasc'];
     $data_morte = $_POST['data_morte'];
     $autor_morto = $_POST['opcao'];
+    $id = $_GET['id'];
 
 
 
@@ -57,7 +58,6 @@
         $data_morte = NULL;
     }
 
-
     if (isset($_FILES['foto'])) {
         $nome_arquivo = $_FILES['foto']['name'];
         $caminho_temporario = $_FILES['foto']['tmp_name'];
@@ -78,11 +78,9 @@
             move_uploaded_file($caminho_temporario, $caminho_destino);
 
         } else {
-            header("Location: cadastrar.php");
+            header("Location: cadastrar.php?erro=15");
         }
     }
-
-    // inserindo no banco
 
     if ($id == 0) {
         $sql = "INSERT INTO autor (autor_nome, autor_data_nasc, autor_data_morte, autor_foto) VALUES (?, ?, ?, ?)";
@@ -102,12 +100,10 @@
 
     }
 
-    $comando = mysqli_prepare($conexao, $sql);
-
     mysqli_stmt_execute($comando);
 
     mysqli_stmt_close($comando);
 
-    header("Location: ../index.php");
+    header("Location: ../listar.php?objeto=autor");
 
 ?>

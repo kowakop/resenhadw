@@ -53,7 +53,7 @@ else {
 
 <a href="../index.php" target="_top">Voltar</a> <br><br>
 
-<form action="salvar.php" method="POST" enctype="multipart/form-data">
+<form action="salvar.php?id=<?php echo $id ?>" method="POST" enctype="multipart/form-data">
 
 Nome do Autor: <br>
 <input type="text" name="nome" required value="<?php echo $nome ?>"> <br><br>
@@ -62,12 +62,12 @@ Data de Nascimento: <br>
 <input type="date" name="data_nasc" required value="<?php echo $nascimento ?>"> <br><br>
 
 O autor já morreu? <br>
-<input type="radio" name="opcao" value="sim" <?php if ($morte != "" && $morte != null) echo "checked"; ?>> Sim
-<input type="radio" name="opcao" value="nao" <?php if ($morte != "" && $morte == null) echo "checked"; ?>> Não
+<input type="radio" name="opcao" value="sim" onclick="mostrar()" <?php if ($morte != "" && $morte != null) echo "checked"; ?>> Sim
+<input type="radio" name="opcao" value="nao" onclick="mostrar()" <?php if ($morte != "" && $morte == null) echo "checked"; ?>> Não
 <br><br>
 
-Data da morte: <br>Editar
-<input type="date" name="data_morte" value="<?php echo $morte ?>"> <br><br>
+<span id="texto_morte" >Data da morte:</span> <br>
+<input type="date" id="data_morte" name="data_morte" value="<?php echo $morte ?>" > <br><br>
 
 Foto do autor: <br>
 <input type="file" name="foto">
@@ -83,6 +83,35 @@ Listagem de Autores: <br>
 <?php
 require_once "../erro_login.php"
 ?>
+
+<script>
+function mostrar() {
+  var opcoes = document.getElementsByName("opcao");
+  // descobri que isso volta um array vou ter que fazer um for nessa bomba
+  var campo = document.getElementById("data_morte");
+  var texto = document.getElementById("texto_morte");
+
+  selecionado = ""
+  for (var i = 0; i < 2; i++) {
+    if (opcoes[i].checked) {
+      selecionado = opcoes[i].value;
+      break;
+    }
+  }
+
+  if (selecionado == "sim") {
+    campo.style.display = "block";
+    texto.style.display = "block";
+  } else {
+    campo.style.display = "none";
+    texto.style.display = "none";
+  }
+}
+
+mostrar()
+
+</script>
+
 
 </form>
 </body>
