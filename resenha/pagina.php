@@ -40,10 +40,14 @@ $qtd_favoritos = mysqli_fetch_assoc($resultados_fav)['qtd_favoritos'];
     <?php 
     if(isset($_GET["voltar"])) {
         $voltar = $_GET["voltar"];
-        if($)
+        if($voltar == "feed") {
+            echo '<a href="./feed.php">voltar</a>';
+        } else {
+            echo '<a href="../listar.php?objeto=resenha">voltar</a>';
+        }
     }
     ?>
-    <a href="../listar.php">voltar</a>
+    
 <?php
 if ($resenha = mysqli_fetch_assoc($resultados_resenha)) {
     echo "<div class='resenha'>";

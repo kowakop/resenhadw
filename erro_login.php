@@ -59,6 +59,11 @@ if (isset($_GET['e']) && $_GET['e'] != NULL) {
         echo "*Nome não pode ser maior que 70 caracteres abrevie algum sobrenome";
     }
 
+    else if ($erro == 15){
+        echo "*imagem não suportada";
+    }
+
+
 
     echo "</span>";
     echo '<style>
