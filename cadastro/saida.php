@@ -1,7 +1,6 @@
 <?php
 
     session_start();
-    session_destroy();
 
     require_once "../conexao.php";
     $nome = $_POST['nome'];
@@ -94,25 +93,34 @@
     mysqli_stmt_bind_param($comando, 'ssssss', $nome, $nascimento, $email, $senha, $nick, $tipo);
 
     mysqli_stmt_execute($comando);
-    
+
+
+    $novo_id = mysqli_insert_id($conexao);
+
+    $sql = "SELECT * FROM usuario WHERE usuario_id = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, "i", $novo_id);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+    $bd_dados = mysqli_fetch_assoc($resultado);
+        
 
     if (isset($_FILES['foto'])) {
         $nome_arquivo = $_FILES['foto']['name'];
         $caminho_temporario = $_FILES['foto']['tmp_name'];
     
-        // Pegar a extensão do arquivo
+
         $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
     
         $extensoesValidas = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
     
         if (in_array(strtolower($extensao), $extensoesValidas)) {
-            // Gerar um novo nome
+
             $novo_nome = uniqid() . "." . $extensao;
-    
-            // Lembre-se de criar a pasta e ajustar as permissões.
+
             $caminho_destino = "../fotos/" . $novo_nome;
     
-            // Mover o arquivo para o diretório de destino
+
             move_uploaded_file($caminho_temporario, $caminho_destino);
     
             $sql = "UPDATE usuario SET usuario_foto = ? WHERE usuario_nick = ?";
@@ -129,13 +137,11 @@
     $_SESSION["tipo"] = $bd_dados['usuario_tipo'];
     $_SESSION["logado"] = True;
     $_SESSION["nick"] = $nick;
-    $_SESSION['id'] = $bd_dados['usuario_id'];
+    $_SESSION['id'] = $novo_id;
     $_SESSION['tipo'] = $bd_dados['usuario_tipo'];
 
 
 
-    mysqli_stmt_close($comando);
-
-    header("Location: index.php");
+    header("Location: ../index.php");
 
 ?>
