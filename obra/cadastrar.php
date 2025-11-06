@@ -55,7 +55,7 @@ if (isset($_GET['id'])) {
 
 <body>
 
-    <form action="salvar_obra.php" method="post" enctype="multipart/form-data">
+    <form action="salvar.php" method="post" enctype="multipart/form-data">
 
         Nome da obra: <br>
         <input type="text" name="nome" required value="<?php echo $nome ?>"> <br><br>
