@@ -67,11 +67,7 @@
 <body>
     <h2>Lista de <?php echo $palavra; ?></h2>
 
-    <?php
-        $url = "../feed.php";
-        $url = urlencode($url);
-        echo "<a href='./index.php?url=$url' target='principal'>";
-        ?>
+
     Organizar por:
     <select id='select' onchange="filtrar()">
 

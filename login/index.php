@@ -23,7 +23,6 @@
     require_once "../erro_login.php"
     ?>
 
-    <br><br>
     <input type="submit" value="Logar">
     <br><br>
     <a href="../cadastro/index.php">Não possui uma conta? Cadastre-se</a>

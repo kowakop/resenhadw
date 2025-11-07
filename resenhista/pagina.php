@@ -35,7 +35,12 @@ mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
 $resultados_resenhas = mysqli_stmt_get_result($stmt);
 
-$qtd_resenhas = mysqli_fetch_assoc($resultados_resenhas)['qtd_resenhas'];
+$linha_resenhas = mysqli_fetch_assoc($resultados_resenhas);
+if ($linha_resenhas) {
+    $qtd_resenhas = $linha_resenhas['qtd_resenhas'];
+} else {
+    $qtd_resenhas = 0;
+}
 ?>
 
 <!DOCTYPE html>
@@ -161,7 +166,12 @@ $qtd_resenhas = mysqli_fetch_assoc($resultados_resenhas)['qtd_resenhas'];
     </style>
 </head>
 <body>
-    <a href="../listar.php?objeto=resenhista">voltar</a>
+  <?php
+        $url = "listar.php?objeto=resenhista";
+        $url = urlencode($url);
+        echo "<a href='../index.php?url=$url' class='link_menu' target='top'>";
+        ?>
+        voltar</a>
     <?php
     if ($usuario = mysqli_fetch_assoc($resultados_user)) {
     $foto = $usuario['usuario_foto'];
@@ -176,7 +186,9 @@ $qtd_resenhas = mysqli_fetch_assoc($resultados_resenhas)['qtd_resenhas'];
                 echo"<img src='$arquivo'>";
                 echo"<button>Favoritar</button>";
                 if ($_SESSION['tipo'] == 'admin' || $_SESSION['id'] == $usuario['usuario_id']) {
-                  echo "<button><a href='cadastrar.php?id=" . $usuario['usuario_id'] . "'>Editar perfil </button></a>";
+                  $url = "cadastro/index.php?id=" . $usuario['usuario_id'];
+                  $url = urlencode($url);
+                  echo "<button><a href='../index.php?url=" . $url . "' target='_top'>Editar perfil </button></a>";
                 }
             echo"</div>";
 

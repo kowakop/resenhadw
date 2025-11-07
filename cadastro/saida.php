@@ -18,6 +18,8 @@
     $tempo = strtotime($nascimento);
     $hoje = time();
 
+    $id = $_GET['id'];
+
     if ($nome == "" || $email == "" || $senha == "" || $nascimento == "" || $nick == "") {
         header("Location: index.php?e=1");
     }
@@ -52,8 +54,53 @@
     elseif (strlen($nome) > 70){
         header("Location: index.php?e=14");
     }
+    if (isset($_POST['tipo']) && $_POST['tipo'] == "admin") {
+        $tipo = "admin";
+    } else {
+        $tipo = "comum";
+    }
 
-    $sql = "SELECT * FROM usuario WHERE usuario_nick = ?";
+    if ($id != 0)  {
+        //editar
+        $sql = "UPDATE usuario SET usuario_nome = ?, usuario_data_nasc = ?, usuario_nick = ?,usuario_tipo = ? WHERE usuario_id = ?";
+        
+        $comando = mysqli_prepare($conexao, $sql);
+
+        mysqli_stmt_bind_param($comando, 'ssssi', $nome, $nascimento, $nick, $tipo, $id);
+        mysqli_stmt_execute($comando);
+
+
+        if (isset($_FILES['foto'])) {
+            $nome_arquivo = $_FILES['foto']['name'];
+            $caminho_temporario = $_FILES['foto']['tmp_name'];
+        
+    
+            $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
+        
+            $extensoesValidas = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
+        
+            if (in_array(strtolower($extensao), $extensoesValidas)) {
+    
+                $novo_nome = uniqid() . "." . $extensao;
+    
+                $caminho_destino = "../fotos/" . $novo_nome;
+        
+    
+                move_uploaded_file($caminho_temporario, $caminho_destino);
+        
+                $sql = "UPDATE usuario SET usuario_foto = ? WHERE usuario_nick = ?";
+                $comando = mysqli_prepare($conexao, $sql);
+        
+                mysqli_stmt_bind_param($comando, 'ss', $novo_nome, $nick);
+        
+                mysqli_stmt_execute($comando);
+            } 
+            
+            header("Location: ../resenhista/listar.php");
+        }
+
+    } else {
+        $sql = "SELECT * FROM usuario WHERE usuario_nick = ?";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, "s", $nick);
     mysqli_stmt_execute($comando);
@@ -77,12 +124,6 @@
 
     if ($bd_dados) {
         header("Location: index.php?e=13");
-    }
-
-    if (isset($_GET['tipo']) && $_GET['tipo'] == "admin") {
-        $tipo = "admin";
-    } else {
-        $tipo = "comum";
     }
 
     $sql = "INSERT INTO usuario (usuario_nome, usuario_data_nasc, usuario_email, usuario_senha, usuario_nick, usuario_tipo) 
@@ -130,7 +171,7 @@
     
             mysqli_stmt_execute($comando);
         } else {
-            header("Location: ../index.php");
+            header("Location: ./index.php?erro=15");
         }
     }
     
@@ -142,6 +183,7 @@
 
 
 
-    header("Location: ../index.php");
+    header("Location: ../resenhista/listar.php");
+}
 
 ?>

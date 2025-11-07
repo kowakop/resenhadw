@@ -109,7 +109,7 @@ if (!isset($_SESSION['id'])) {
         $url = urlencode($url);
         echo "<a href='./index.php?url=$url' class='link_menu' >";
         ?>
-            📝 <span class="texto_menu">Todas as resenhas</span>
+             <span class="texto_menu">Todas as resenhas</span>
         </a>
 
         <?php
@@ -117,7 +117,7 @@ if (!isset($_SESSION['id'])) {
         $url = urlencode($url);
         echo "<a href='./index.php?url=$url' class='link_menu' >";
         ?>
-            👨‍🎨 <span class="texto_menu">Autores</span>
+             <span class="texto_menu">Autores</span>
         </a>
 
         <?php
@@ -125,7 +125,7 @@ if (!isset($_SESSION['id'])) {
         $url = urlencode($url);
         echo "<a href='./index.php?url=$url' class='link_menu'>";
         ?>
-            🧑‍💻 <span class="texto_menu">Resenhistas</span>
+             <span class="texto_menu">Resenhistas</span>
         </a>
 
         <?php
@@ -133,7 +133,7 @@ if (!isset($_SESSION['id'])) {
         $url = urlencode($url);
         echo "<a href='./index.php?url=$url' class='link_menu' >";
         ?>
-            🔍 <span class="texto_menu">Pesquisar Mangás</span>
+             <span class="texto_menu">Pesquisar Mangás</span>
         </a>
 
         <?php
@@ -141,7 +141,7 @@ if (!isset($_SESSION['id'])) {
         $url = urlencode($url);
         echo "<a href='./index.php?url=$url' class='link_menu' >";
         ?>
-            📝 <span class="texto_menu">Nova Resenha</span>
+             <span class="texto_menu">Nova Resenha</span>
         </a>
 
 
@@ -166,7 +166,7 @@ if (!isset($_SESSION['id'])) {
         <a href="./devs/about.html" class="link_menu" target="principal">Sobre Nós</a>
         <a href="./devs/contato.html" class="link_menu" target="principal">Contate-nos</a>
         <a href="./devs/termos.html" class="link_menu" target="principal">Termos</a>
-        <a href="./logout.php" class="link_menu">🚪 Sair</a>
+        <a href="./logout.php" class="link_menu"> Sair</a>
     </div>
 
         <!-- IFRAME à ESQUERDA -->

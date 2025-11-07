@@ -51,6 +51,11 @@ if (isset($_SESSION['tipo'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resenha</title>
   <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <style>
+    #nome_obra {
+      margin: 0;
+    }
+  </style>
 </head>
 
 <body>
@@ -77,13 +82,12 @@ if (isset($_SESSION['tipo'])) {
         echo ">$nome</option>";
       }
       ?>
-    </select> <br><br>
+    </select> <span id="espaco"></span>
 
     <img src="#" alt="" id="foto_obra" style="max-width:200px;">
     <h2 id="nome_obra"></h2>
 
     <br><br>
-    <!-- dependendo do tamanho do titulo ele vaza do card -->
     Título: <br>
     <input type="text" name="titulo" value="<?php echo htmlspecialchars($titulo); ?>" required>
     <br><br><br>
@@ -99,12 +103,15 @@ if (isset($_SESSION['tipo'])) {
     var select = document.getElementById('select');
     var foto_obra = document.getElementById('foto_obra');
     var nome_obra = document.getElementById('nome_obra');
+    var espaco = document.getElementById('espaco');
 
     function mostrar() {
       var opcaoSelecionada = select.options[select.selectedIndex];
       var foto = opcaoSelecionada.getAttribute('data-foto');
       foto_obra.src = "../fotos/" + foto;
       nome_obra.innerText = opcaoSelecionada.text;
+      nome_obra.style.margin = "0.83em"
+      espaco.innerHTML = "<br><br>"
     }
   </script>
 </body>

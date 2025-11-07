@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
 
     if (isset($_SESSION['tipo'])) {
         if ($_SESSION['tipo'] == "admin" || $_SESSION['id'] == $id) {
-            require_once "conexao.php";
+            require_once "../conexao.php";
 
             $sql = "SELECT * FROM usuario WHERE usuario_id = ?";
             $comando = mysqli_prepare($conexao, $sql);
@@ -24,6 +24,7 @@ if (isset($_GET['id'])) {
             $nascimento = $usuario['usuario_data_nasc'];
             $email = $usuario['usuario_email'];
             $senha = $usuario['usuario_senha'];
+
         }
 
     }
@@ -38,6 +39,7 @@ else {
     $senha = "";
 }
 
+
 ?>
 
 
@@ -51,32 +53,47 @@ else {
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 </head>
 <body>
-<form action="saida.php" method='POST' enctype="multipart/form-data">
+<form action="saida.php?id=<?php echo $id; ?>" method='POST' enctype="multipart/form-data">
     Nickname:<br>
-    <input type="text" name="nick" required placeholder='Nome único'>
+    <input type="text" name="nick" required placeholder='Nome único' 
+           value="<?php echo $nick; ?>">
     <br><br> 
 
     Nome: <br>
-    <input type="text" name="nome" required placeholder='Seu nome'>
+    <input type="text" name="nome" required placeholder='Seu nome'
+           value="<?php echo $nome; ?>">
     <br><br>
 
-    <!-- teste git -->
     Data de nascimento:
     <br>
-    <input type="date" name="nascimento" required>
+    <input type="date" name="nascimento" required 
+           value="<?php echo $nascimento; ?>">
     <br><br>
 
     E-mail:
     <br>
-    <input type="text" name="email" placeholder="Informe o seu Email" required>
+    <input type="text" name="email" placeholder="Informe o seu Email" required 
+           value="<?php echo $email; ?>">
     <br><br>
     
     Digite sua senha:
     <br>
-    
-    <input type="password" name="senha" id="senha" required> <br>
-    <input type="checkbox" name="" id="mostrar_senha"><span>mostra senha</span> 
-    <br><br>    
+    <input type="password" name="senha" id="senha" required 
+           value="<?php echo $senha; ?>"> 
+    <br>
+    <input type="checkbox" id="mostrar_senha"><span>mostra senha</span> 
+    <br><br> 
+    <?php 
+    if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == "admin") {
+        echo "
+        Tipo de usuário:   
+        <select name='tipo' id=''>
+            <option value='comum'>Comum</option>
+            <option value='admin'>Admin</option>
+        </select> <br> <br>
+        ";
+    }
+    ?>
     
     Selecione sua foto de perfil:
     <br>
@@ -84,24 +101,14 @@ else {
 
     <br><br>
 
-    <?php 
-    if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == "admin") {
-        echo "
-        Tipo de usuário: 
-        <select name='tipo' id=''>
-            <option value='comum'>Comum</option>
-            <option value='admin'>Admin</option>
-        </select>
-        ";
-    }
-    ?>
+
 
     <input type="submit" value="Salvar">
     <br><br>
     
 
     <?php
-    require_once "../erro_login.php"
+    require_once "../erro_login.php";
     ?>
     </form>
     <script> 
