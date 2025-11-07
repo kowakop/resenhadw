@@ -2,12 +2,12 @@
 require_once "../conexao.php";
 // issets verifica se o valor existe caso contrario ele coloca nulo
 $id = isset($_POST['id']) ? $_POST['id'] : "";
-$nome = isset($_POST['obra_nome']) ? $_POST['obra_nome'] : "";
-$data_inicio = isset($_POST['obra_data_inicio']) ? $_POST['obra_data_inicio'] : "";
-$data_final = isset($_POST['obra_data_final']) ? $_POST['obra_data_final'] : "";
-$qtd_capitulos = isset($_POST['obra_qtd_capitulos']) ? $_POST['obra_qtd_capitulos'] : "";
-$qtd_volumes = isset($_POST['obra_qtd_volumes']) ? $_POST['obra_qtd_volumes'] : "";
-$autor_id = isset($_POST['obra_autor_id']) ? $_POST['obra_autor_id'] : "";
+$nome = isset($_POST['nome']) ? $_POST['nome'] : "";
+$data_inicio = isset($_POST['inicio']) ? $_POST['inicio'] : "";
+$data_final = isset($_POST['final']) ? $_POST['final'] : "";
+$qtd_capitulos = isset($_POST['qtd_cap']) ? $_POST['qtd_cap'] : "";
+$qtd_volumes = isset($_POST['qtd_vol']) ? $_POST['qtd_vol'] : "";
+$autor_id = isset($_POST['autor']) ? $_POST['autor'] : "";
 
 // retirar espaços
 $nome = trim($nome);
@@ -45,9 +45,9 @@ if (!is_numeric($autor_id) || $autor_id <= 0) {
 // upload de imagem
 $novo_nome = "padrao-obra.png";
 
-if ($_FILES['obra_foto']['error'] == UPLOAD_ERR_OK) {
-    $nome_arquivo = $_FILES['obra_foto']['name'];
-    $caminho_temporario = $_FILES['obra_foto']['tmp_name'];
+if ($_FILES['foto']['error'] == UPLOAD_ERR_OK) {
+    $nome_arquivo = $_FILES['foto']['name'];
+    $caminho_temporario = $_FILES['foto']['tmp_name'];
     $extensao = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION));
 
     $extensoesValidas = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
