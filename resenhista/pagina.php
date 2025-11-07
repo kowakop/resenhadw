@@ -15,8 +15,8 @@ $resultados_user = mysqli_stmt_get_result($stmt);
 
 //favoritos
 $sql = "SELECT COUNT(*) AS qtd_favoritos 
-           FROM favorito 
-           WHERE favorito_usuario_id = ? AND favorito_tipo = 're'";
+        FROM favorito 
+        WHERE favorito_id = ? AND favorito_tipo = 're'";
 $stmt = mysqli_prepare($conexao, $sql);
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
@@ -27,9 +27,7 @@ $qtd_favoritos = mysqli_fetch_assoc($resultados_fav)['qtd_favoritos'];
 //resenhas
 $sql = "SELECT COUNT(resenha_id) AS qtd_resenhas 
                FROM resenha 
-               INNER JOIN obra o ON resenha_obra_id = obra_id
-               WHERE obra_autor_id = ?
-               group by resenha_id";
+               WHERE resenha_usuario_id = ?";
 $stmt = mysqli_prepare($conexao, $sql);
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
@@ -169,7 +167,7 @@ if ($linha_resenhas) {
   <?php
         $url = "listar.php?objeto=resenhista";
         $url = urlencode($url);
-        echo "<a href='../index.php?url=$url' class='link_menu' target='top'>";
+        echo "<a href='../index.php?url=$url' class='link_menu' target='_top'>";
         ?>
         voltar</a>
     <?php
@@ -188,7 +186,7 @@ if ($linha_resenhas) {
                 if ($_SESSION['tipo'] == 'admin' || $_SESSION['id'] == $usuario['usuario_id']) {
                   $url = "cadastro/index.php?id=" . $usuario['usuario_id'];
                   $url = urlencode($url);
-                  echo "<button><a href='../index.php?url=" . $url . "' target='_top'>Editar perfil </button></a>";
+                  echo "<button><a href='../index.php?url=" . $url . "' target='_top'>Editar perfil</a></button>";
                 }
             echo"</div>";
 
@@ -223,25 +221,13 @@ if ($linha_resenhas) {
         echo"</div>";
 
         echo"<div class='info-item'>";
-            echo"  <span class='info-label'>Usuários que favoritaram " . ($usuario['usuario_nick']) . "</span>";
-            echo"  <span class='info-value'>$qtd_resenhas</span>";
+            echo"  <span class='info-label'>Usuários que favoritaram " . htmlspecialchars($usuario['usuario_nick']) . ":</span>";
+            echo"  <span class='info-value'>$qtd_favoritos</span>";
         echo"</div>";
+
       echo"</div>";
     echo"</div>";
   echo"</div>";
-
-        //echo "<img src='$arquivo'>";
-        //echo "<h1>" . htmlspecialchars($usuario['usuario_nome']) . "</h1>";
-        //echo "<p><span>Data de nascimento:</span> " . date('d/m/Y', strtotime($usuario['usuario_data_nasc'])) . "</span></p>";
-        //echo "<p>Favoritos: $qtd_favoritos</p>";
-        //echo "<p>Resenhas: $qtd_resenhas</p>";
-        //if ($tipo == "comum") {
-        //    echo "<a href='cadastrar.php?id=$id'>editar</a>";
-        //}
-        //echo "</div>";
-    //} else {
-    //    echo "Autor não encontrado.";
-    //}
 
     if (!isset($_SESSION['id']) || !isset($_SESSION['tipo'])) {
     header("Location: ../index.php");

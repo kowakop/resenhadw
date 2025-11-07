@@ -49,7 +49,7 @@ else {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar perfil</title>
 </head>
-<body>
+<body id="cadastro">
     <a href="../index.php" target="_top">Voltar</a> <br><br>
 
 <form action="salvar.php" method="POST" enctype="multipart/form-data">
@@ -67,7 +67,7 @@ Foto de perfil: <br>
 <input type="file" name="foto">
 <br><br>
 
-<input type="submit" value="Salvar perfil"> 
+<input type="submit" value="Salvar perfil" id="submeter"> 
 
 <br><br>
 
