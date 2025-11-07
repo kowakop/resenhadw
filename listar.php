@@ -49,6 +49,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista</title>
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="listar.css">
 <style>
         a {
             color: black;
@@ -65,33 +66,35 @@
     </style>
 </head>
 <body>
-    <h2>Lista de <?php echo $palavra; ?></h2>
+    <div class="filtros-container">
+        <h2>Lista de <?php echo $palavra; ?></h2>
 
-
-    Organizar por:
-    <select id='select' onchange="filtrar()">
-
-        <option value="alfabetica">Ordem alfabética</option>
-
-        <option value="data"><?php echo $op1; ?></option>
-        
-        <option value="favorito">Nº de pessoas que favoritaram</option>
-
-        <?php if ($objeto == 'obra') { 
-            echo $op2;
-        }?>
-
-    </select>
-    
-    <input type="checkbox" name="inverter" id="inverter" onclick="filtrar()">Inverter
-
-    <br>
+        <div class="filtros-group">
+            <span class="filtro-label">Organizar por:</span>
+            
+            <select id='select' onchange="filtrar()" class="filtro-select">
+                <option value="alfabetica">Ordem alfabética</option>
+                <option value="data"><?php echo $op1; ?></option>
+                <option value="favorito">Nº de pessoas que favoritaram</option>
+                <?php if ($objeto == 'obra') { 
+                    echo $op2;
+                }?>
+            </select>
+            
+            <label class="checkbox-label">
+                <input type="checkbox" name="inverter" id="inverter" onclick="filtrar()">
+                <span class="checkmark"></span>
+                Inverter
+            </label>
+        </div>
+    </div>
 
     <iframe 
         src='<?php echo "./$objeto/listar.php" ?>' 
         frameborder="0" 
         name="listar_todos" 
-        id="listar_todos">
+        id="listar_todos"
+        class="listar-iframe">
     </iframe>
 
     <script>
@@ -109,7 +112,6 @@
 
         listar.src = "./<?php echo $objeto; ?>/listar.php?filtro=" + filtro + "&ordem=" + ordem;
     }
-</script>
-    
+    </script>
 </body>
 </html>

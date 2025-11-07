@@ -37,6 +37,11 @@ if ($filtro == "data") {
     $sql .= " ORDER BY autor_data_nasc $ordem";
 } else {
     if ($filtro == "favorito") {
+        if($ordem == "DESC") {
+            $ordem = "ASC";
+        } else {
+            $ordem = "DESC";
+        }
         $sql .= " ORDER BY qtd_favoritos $ordem";
     } else {
         $sql .= " ORDER BY autor_nome $ordem";
@@ -53,35 +58,12 @@ $resultado = mysqli_query($conexao, $sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Autores</title>
-    <style>
-        .conteiner {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin: 30px 0px;
-        }
+  <link rel="stylesheet" href="../listar.css">
 
-        .autor {
-            border: 1px solid lightblue;
-            padding: 20px;
-            width: 220px;
-        }
-
-        img {
-            width: 60px;
-            height: 60px;
-        }
-
-        a {
-            color: black;
-            text-decoration: none;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="conteiner">
+    <div class="container lista-container">
         <?php
         while ($autor = mysqli_fetch_assoc($resultado)) {
             $foto = $autor["autor_foto"];
@@ -102,20 +84,22 @@ $resultado = mysqli_query($conexao, $sql);
 
             $nascimento = date('d/m/Y', strtotime($autor["autor_data_nasc"]));
 
-            echo '<a href="pagina.php?id=' . $autor['autor_id'] . '" target="principal">';
-            echo '<div class="autor">';
-            echo '<img src="' . $arquivo . '" alt="foto do autor">';
-            echo '<p>' . htmlspecialchars($autor['autor_nome']) . '</p>';
-            echo '<p>Nascimento: <span>' . htmlspecialchars($nascimento) . '</span></p>';
-            echo '<p>' . $morte . '</p>';
-            echo '<p>Total de obras: ' . $autor['qtd_obras'] . '</p>';
-            echo '<p>' . $autor['qtd_favoritos'] . ' pessoas favoritaram esse autor</p>';
+            $url = "autor/pagina.php?id=" . $autor['autor_id'];
+            $url = urlencode($url);
+
+            echo '<a href="../index.php?url=' . $url . '" target="_top" class="item-link">';
+            echo '<div class="item-card">';
+            echo '<img src="' . $arquivo . '" alt="foto do autor" class="item-image">';
+            echo '<h3 class="item-title">' . htmlspecialchars($autor['autor_nome']) . '</h3>';
+            echo '<p class="item-info">Nascimento: <span>' . htmlspecialchars($nascimento) . '</span></p>';
+            echo '<p class="item-info">' . $morte . '</p>';
+            echo '<p class="item-info">Total de obras: ' . $autor['qtd_obras'] . '</p>';
+            echo '<p class="item-favoritos">' . $autor['qtd_favoritos'] . ' pessoas favoritaram esse autor</p>';
             echo '</div>';
             echo '</a>';
         }
         ?>
     </div>
-
 </body>
 
 </html>

@@ -17,10 +17,12 @@ require_once "../conexao.php";
                     *,
                     o.obra_nome AS obra_titulo,
                     o.obra_foto AS obra_foto,
-                    a.autor_nome AS autor_nome
+                    a.autor_nome AS autor_nome,
+                    usuario_nome
                 FROM resenha
                 LEFT JOIN obra o ON resenha_obra_id = obra_id
                 LEFT JOIN autor a ON obra_autor_id = autor_id
+                INNER JOIN usuario ON resenha_usuario_id = usuario_id
                 ORDER BY resenha_id DESC";
 
         $resultado = mysqli_query($conexao, $sql);
@@ -28,9 +30,8 @@ require_once "../conexao.php";
         if (mysqli_num_rows($resultado) > 0) {
             while ($linha = mysqli_fetch_assoc($resultado)) {
                 $titulo = $linha['resenha_titulo'] ?? 'Sem título';
-                $texto = $linha['resenha_texto'] ?? '';
-                $obra = $linha['obra_titulo'] ?? 'Obra desconhecida';
-                $autor = $linha['autor_nome'] ?? 'Autor desconhecido';
+                $obra = $linha['obra_titulo'];
+                $autor = $linha['usuario_nome'];
                 $foto = !empty($linha['obra_foto']) ? "../fotos/" . $linha['obra_foto'] : "../fotos/padrao-obra.png";
                 $id = $linha['resenha_id'];
 
@@ -38,7 +39,6 @@ require_once "../conexao.php";
                 echo "<img src='" . htmlspecialchars($foto) . "' alt='Capa da obra' class='capa'>";
                 echo "<h3>" . htmlspecialchars($titulo) . "</h3>";
                 echo "<h4>" . htmlspecialchars($obra) . "</h4>";
-                echo "<p>" . nl2br(htmlspecialchars($texto)) . "</p>";
                 echo "<p class='autor'>👤 " . htmlspecialchars($autor) . "</p>";
                 echo "<a href='pagina.php?id=" . urlencode($id) . "'>Ver mais</a>";
                 echo "</div>";

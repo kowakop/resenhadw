@@ -69,8 +69,8 @@ if (!isset($_SESSION['id'])) {
             $url = urlencode($url);
             echo "<a href='./index.php?url=$url'>";
             ?>
-                <img src="./fotos/logo.png" alt="logo Resenhando Mangás" id="logo" style="height: 70px;">
-                <img src="./fotos/Resenhando.png" alt="texto resenhando mangás" id="logo2" style="height: 80px; width: 250px;">
+                <img src="./fotos/logo.png" id="logo" style="height: 70px;">
+                <img src="./fotos/Resenhando.png" id="logo2" style="height: 80px; width: 250px;">
             </a>
         </div>
 

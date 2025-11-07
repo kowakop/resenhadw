@@ -59,7 +59,11 @@ $qtd_resenhas = mysqli_fetch_assoc($resultados_resenhas)['qtd_resenhas'];
 </head>
 
 <body>
-    <a href="../listar.php?objeto=autor">voltar</a>
+    <?php
+        $url = "listar.php?objeto=autor";
+        $url = urlencode($url);
+        echo "<a href='../index.php?url=$url' class='link_menu' target='_top'>";
+        ?>voltar</a>
     <?php
 
     if ($autor = mysqli_fetch_assoc($resultados_autor)) {
