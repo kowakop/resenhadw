@@ -91,7 +91,10 @@ $resultado = mysqli_query($conexao, $sql);
                 $data = "Data não informada";
             }
 
-            echo '<a href="pagina.php?id=' . $resenha['resenha_id'] . '" target="principal" style="text-decoration: none; color: black;">';
+            $url = "resenha/pagina.php?id=" . $resenha['resenha_id'];
+            $url = urlencode($url);
+
+            echo '<a href="../index.php?url=' . $url . '" target="_top"' . '" style="text-decoration: none; color: black;">';
             echo '<div class="resenha" style="border: 1px solid lightblue; padding: 20px; width: 250px; border-radius: 10px;">';
             echo '<h3>' . $resenha['resenha_titulo'] . '</h3>';
             echo '<p><strong>Data:</strong> ' . $data . '</p>';

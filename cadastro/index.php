@@ -97,7 +97,7 @@ else {
                 ";
             }
             ?>
-    
+
             Selecione sua foto de perfil:
 
             <input type="file" name="foto">

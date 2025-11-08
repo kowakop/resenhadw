@@ -183,7 +183,7 @@
 
 
 
-    header("Location: ../resenhista/listar.php");
+    header("Location: ../index.php?url=resenha%2Ffeed.php");
 }
 
 ?>

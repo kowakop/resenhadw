@@ -114,6 +114,16 @@ while ($obra = mysqli_fetch_assoc($resultado)) {
     //if (!file_exists($arquivo) || !$foto) {
     //    $arquivo = "../fotos/padrao-autor.png";
     //}
+<div class="container">
+<?php
+    //while ($obra = mysqli_fetch_assoc($resultado)) {
+    // Verifica a capa da obra
+    //$capa = $obra["obra_capa"];
+    //$arquivo = "../fotos/$capa";
+    //if (!file_exists($arquivo) || !$capa) {
+        //$arquivo = "../fotos/padrao-obra.png"; // usa uma capa padrão se não houver 
+    }
+
 
             $inicio = date('d/m/Y', strtotime($obra["obra_data_inicio"]));
             if ($obra["obra_data_final"]) {
@@ -122,7 +132,10 @@ while ($obra = mysqli_fetch_assoc($resultado)) {
                 $final = "Em andamento";
             }
 
-    echo '<a href="pagina.php?id=' . $obra['obra_id'] . '" target="_top">';
+    $url = "obra/pagina.php?id=" . $obra['obra_id'];
+            $url = urlencode($url);
+
+            echo '<a href="../index.php?url=' . $url . '" target="_top" class="item-link">';
     echo '<div class="obra">';
     //echo '<img src="' . htmlspecialchars($arquivo) . '" alt="Foto do autor">';
     echo '<p><strong>' . htmlspecialchars($obra['obra_nome']) . '</strong></p>';

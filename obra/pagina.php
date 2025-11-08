@@ -45,7 +45,7 @@ $qtd_favoritos = mysqli_fetch_assoc($resultados_fav)['qtd_favoritos'];
 </head>
 
 <body>
-    <a href="../index.php?url=listar.php%3Fobjeto%3Dobra">voltar</a>
+    <a href="../index.php?url=listar.php%3Fobjeto%3Dobra" target="_top">voltar</a>
     <?php
 
     if ($obra = mysqli_fetch_assoc($resultados_obra)) {

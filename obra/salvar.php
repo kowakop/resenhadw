@@ -83,6 +83,6 @@ if ($id == 0 || $id == "") {
 mysqli_stmt_execute($comando);
 mysqli_stmt_close($comando);
 
-header("Location: ../index.php");
+header("Location: ../index.php?url=listar.php%3Fobjeto%3Dobra");
 exit;
 ?>

@@ -166,7 +166,7 @@ if (!isset($_SESSION['id'])) {
         <a href="./devs/about.html" class="link_menu" target="principal">Sobre Nós</a>
         <a href="./devs/contato.html" class="link_menu" target="principal">Contate-nos</a>
         <a href="./devs/termos.html" class="link_menu" target="principal">Termos</a>
-        <a href="./logout.php" class="link_menu"> Sair</a>
+        <a href="./login/deslogar.php" class="link_menu"> Sair</a>
     </div>
 
         <!-- IFRAME à ESQUERDA -->

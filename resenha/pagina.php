@@ -38,14 +38,18 @@ $qtd_favoritos = mysqli_fetch_assoc($resultados_fav)['qtd_favoritos'];
 </head>
 <body>
     <?php 
+    $url = "../listar.php?objeto=resenha";
     if(isset($_GET["voltar"])) {
         $voltar = $_GET["voltar"];
         if($voltar == "feed") {
-            echo '<a href="./feed.php">voltar</a>';
+            $url = './feed.php">voltar</a>';
         } else {
-            echo '<a href="../listar.php?objeto=resenha">voltar</a>';
+            $url = "../listar.php?objeto=resenha";
         }
     }
+    $url = urlencode($url);
+
+    echo '<a href="../index.php?url=' . $url . '" target="_top">voltar</a>';
     ?>
     
 <?php
