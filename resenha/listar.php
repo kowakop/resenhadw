@@ -52,31 +52,7 @@ $resultado = mysqli_query($conexao, $sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de resenhas</title>
-    <style>
-        .conteiner {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin: 30px 0px;
-        }
-
-        .resenha {
-            border: 1px solid lightblue;
-            padding: 20px;
-            width: 220px;
-        }
-
-        img {
-            width: 60px;
-            height: 60px;
-        }
-
-        a {
-            color: black;
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" href="../listar.css">
 </head>
 
 <body>
@@ -100,16 +76,16 @@ $resultado = mysqli_query($conexao, $sql);
             $data_segura = htmlspecialchars($data);
             $usuario_seguro = htmlspecialchars($resenha['usuario_nome']);
             $obra_segura = htmlspecialchars($resenha['obra_nome']);
-            
-            echo '<a href="../index.php?url=' . $url_segura . '" target="_top" style="text-decoration: none; color: black;">';
-            echo '<div class="resenha" style="border: 1px solid lightblue; padding: 20px; width: 250px; border-radius: 10px;">';
-            echo '<h3>' . $titulo_seguro . '</h3>';
-            echo '<p><strong>Data:</strong> ' . $data_segura . '</p>';
-            echo '<p><strong>Autor da resenha:</strong> ' . $usuario_seguro . '</p>';
-            echo '<p><strong>Obra:</strong> ' . $obra_segura . '</p>';
-            echo '</div>';
+
+            echo '<a href="../index.php?url=' . $url . '" target="_top" class="item-link">';
+            echo '  <div class="item-card">';
+            echo '      <h3 class="item-title">' . $titulo_seguro . '</h3>';
+            echo '      <p class="item-info"><strong>Data:</strong> ' . $data_segura . '</p>';
+            echo '      <p class="item-info"><strong>Autor da resenha:</strong> ' . $usuario_seguro . '</p>';
+            echo '      <p class="item-info"><strong>Obra:</strong> ' . $obra_segura . '</p>';
+            echo '  </div>';
             echo '</a>';
-            
+                       
         }
         ?>
     </div>

@@ -47,12 +47,13 @@ if ($linha_resenhas) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página do Resenhista</title>
-    <style>
-        body {
+<style>
+
+    body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
+      background: #fff; /* Fundo branco */
+      color: #111;      /* Texto escuro */
     }
 
     .header {
@@ -65,7 +66,8 @@ if ($linha_resenhas) {
       display: flex;
       gap: 30px;
       padding: 20px 40px;
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: #fff; /* container branco */
+      color: #111;            /* texto escuro */
     }
 
     .sidebar {
@@ -80,14 +82,14 @@ if ($linha_resenhas) {
       width: 130px;
       height: 130px;
       border-radius: 50%;
-      border: 3px solid #333;
+      border: 3px solid #ccc; /* borda mais clara */
     }
 
     .sidebar button {
       width: 100%;
-      background: #222;
+      background: #eee;       /* botão claro */
       border: none;
-      color: #fff;
+      color: #111;
       padding: 10px;
       border-radius: 6px;
       cursor: pointer;
@@ -95,7 +97,7 @@ if ($linha_resenhas) {
     }
 
     .sidebar button:hover {
-      background: #333;
+      background: #ddd;
     }
 
     .content {
@@ -105,6 +107,7 @@ if ($linha_resenhas) {
     .username {
       font-size: 2rem;
       font-weight: bold;
+      color: #111;
     }
 
     .tabs {
@@ -114,15 +117,16 @@ if ($linha_resenhas) {
     }
 
     .tab {
-      background: #222;
+      background: #eee;
       padding: 6px 14px;
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
+      color: #111;
     }
 
     .tab.active {
-      background: #444;
+      background: #ccc;
     }
 
     .info-section {
@@ -134,34 +138,47 @@ if ($linha_resenhas) {
     }
 
     .info-label {
-      color: #bbb;
+      color: #555;
       display: block;
       font-size: 0.9rem;
     }
 
     .info-value {
       font-weight: bold;
+      color: #111;
     }
 
     .connection-bar {
-      background: #222;
+      background: #f5f5f5;
       border-radius: 6px;
       padding: 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 20px;
+      color: #111;
     }
 
     .connection-bar a {
-      color: #aaa;
+      color: #111;
       text-decoration: none;
     }
 
     .connection-bar a:hover {
-      color: #fff;
+      color: #333;
     }
-    </style>
+    .voltar {
+      display: inline-block;
+    background: #0077cc;
+    color: #fff;
+    text-decoration: none;
+    padding: 1vh 2vw;
+    border-radius: 0.6vw;
+    font-size: 1.8vh;
+    transition: background 0.2s ease;
+    }
+</style>
+
 </head>
 <body>
 <?php 
@@ -176,7 +193,7 @@ if ($linha_resenhas) {
     }
     $url = urlencode($url);
 
-    echo '<a href="../index.php?url=' . $url . '" target="_top">voltar</a>';
+    echo '<a href="../index.php?url=' . $url . '" target="_top" class="voltar">voltar</a>';
 
     if ($usuario = mysqli_fetch_assoc($resultados_user)) {
     $foto = $usuario['usuario_foto'];

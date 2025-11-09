@@ -61,12 +61,12 @@ $qtd_favoritos = mysqli_fetch_assoc($resultados_fav)['qtd_favoritos'];
     }
 
     .obra img {
-        width: 250px;            /* largura padronizada */
-        height: 350px;           /* altura padronizada */
-        object-fit: cover;       /* mantém proporção e preenche */
-        border-radius: 8px;      /* cantos levemente arredondados */
+        width: 500px;            
+        height: 350px;           
+        object-fit: cover;       
+        border-radius: 8px;      
         display: block;
-        margin: 0 auto 15px;     /* centraliza a imagem */
+        margin: 0 auto 15px;
     }
 
     .obra h1 {
@@ -123,7 +123,7 @@ if ($obra = mysqli_fetch_assoc($resultados_obra)) {
     $data_final = $obra['obra_data_final'] ? date('d/m/Y', strtotime($obra['obra_data_final'])) : 'Em andamento';
 
     echo "<div class='obra'>";
-    echo "<img src='$arquivo' alt='Foto da obra'>";
+    echo "<img src='$arquivo' alt=''>";
     echo "<h1>" . htmlspecialchars($obra['obra_nome']) . "</h1>";
     echo "<p><strong>Autor:</strong> " . htmlspecialchars($obra['autor_nome']) . "</p>";
     echo "<p><strong>Início:</strong> $data_inicio</p>";

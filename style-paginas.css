@@ -1,0 +1,224 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #111;
+    margin: 0;
+    padding: 4vh 3vw;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #0077cc;
+  }
+  
+  a:hover {
+    color: #005fa3;
+  }
+  
+  .voltar {
+    display: inline-block;
+    background: #eee;
+    color: #111;
+    padding: 1vh 2vw;
+    border-radius: 0.6vw;
+    font-weight: bold;
+    transition: background 0.2s ease;
+    margin-bottom: 2vh;
+  }
+  
+  .voltar:hover {
+    background: #ddd;
+  }
+  
+  /* container geral */
+  .card {
+    background: #f8f8f8;
+    border-radius: 1vw;
+    box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.1);
+    max-width: 70vw;
+    margin: 0 auto;
+    padding: 3vh 3vw;
+    text-align: center;
+  }
+  
+  /* imagens */
+  .card img {
+    width: 50%;
+    max-width: 400px;
+    border-radius: 1vw;
+    margin-bottom: 2vh;
+  }
+  
+  /* títulos */
+  .card h1 {
+    color: #0077cc;
+    font-size: 2.5vh;
+    margin-bottom: 1vh;
+  }
+  
+  /* textos */
+  .card p {
+    font-size: 1.6vh;
+    color: #222;
+    margin: 0.8vh 0;
+  }
+  
+  .card p span {
+    font-weight: bold;
+  }
+  
+  /* botão azul */
+  .botao {
+    display: inline-block;
+    background: #0077cc;
+    color: white;
+    padding: 1vh 2vw;
+    border-radius: 0.6vw;
+    margin-top: 2vh;
+    transition: background 0.2s;
+  }
+  
+  .botao:hover {
+    background: #005fa3;
+  }
+  
+  /* para o admin */
+  .admin-links {
+    margin-top: 3vh;
+    font-size: 1.4vh;
+  }
+  
+  .admin-links a {
+    color: #555;
+    margin: 0 1vw;
+  }
+  
+  .admin-links a:hover {
+    color: #000;
+  }
+
+
+  body.pagina-autor {
+    font-family: Arial, sans-serif;
+    background: #f6f6f6;
+    color: #222;
+    margin: 0;
+    padding: 3vh 3vw;
+  }
+  
+  /* link voltar */
+  .link_menu {
+    display: inline-block;
+    background: #0077cc;
+    color: #fff;
+    text-decoration: none;
+    padding: 1vh 2vw;
+    border-radius: 0.6vw;
+    font-size: 1.8vh;
+    transition: background 0.2s ease;
+  }
+  .link_menu:hover {
+    background: #005fa3;
+  }
+  
+  /* container principal */
+  .autor-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 4vh;
+  }
+  
+  /* card do autor */
+  .autor-card {
+    background: #fff;
+    width: 70vw;
+    max-width: 80vw;
+    padding: 3vh 3vw;
+    border-radius: 1vw;
+    box-shadow: 0 0 1vw rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* imagem */
+  .autor-foto {
+    width: 25vw;
+    max-width: 280px;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 2vh;
+    border: 0.3vw solid #ccc;
+  }
+  
+  /* nome */
+  .autor-nome {
+    font-size: 2.3vh;
+    color: #0077cc;
+    margin-bottom: 1vh;
+  }
+  
+  /* infos e estatísticas */
+  .autor-info,
+  .autor-stats {
+    font-size: 1.8vh;
+    margin: 0.8vh 0;
+  }
+  
+  .autor-info span {
+    font-weight: bold;
+    color: #333;
+  }
+  
+
+  .botao {
+    display: inline-block;
+    background: lightcoral;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 0.6vw;
+    padding: 1.3vh 2vw;
+    font-size: 1.8vh;
+    margin-top: 2vh;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .botao:hover {
+    background: rgb(230, 84, 84);
+  }
+  
+  /* link editar (apenas admin) */
+  .link-editar {
+    display: inline-block;
+    margin-top: 1.5vh;
+    color: #0077cc;
+    text-decoration: none;
+    font-size: 1.6vh;
+  }
+  .link-editar:hover {
+    color: #005fa3;
+    text-decoration: underline;
+  }
+  
+  /* erro */
+  .autor-erro {
+    color: #a00;
+    font-size: 1.8vh;
+    font-weight: bold;
+    margin-top: 2vh;
+  }
+
+  
+  .conteudo-caixa {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 2vh 2vw;
+    margin: 2vh 0;
+    font-size: 2vh;
+    white-space: pre-wrap;
+    line-height: 1.5;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+  }
+  

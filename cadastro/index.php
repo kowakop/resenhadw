@@ -104,10 +104,13 @@ else {
                 }
             }
             ?>
-
+            <br>
+            <br>
             Selecione sua foto de perfil:
 
             <input type="file" name="foto">
+            <br>
+            <br>
 
             <input type="submit" value="Salvar" id="submeter">
 

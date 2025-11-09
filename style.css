@@ -50,8 +50,8 @@
 
         .container_login, .container_cadastro {
             display: flex;
-            width: 850px;
-            height: 550px;
+            width: 950px;
+            height: 650px;
             background: #fff;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             border-radius: 10px;
@@ -150,6 +150,19 @@
         .image-section img:hover {
             transform: scale(1.08);
         }
+
+        .voltar {
+            display: inline-block;
+            background: #eee;
+            color: #111;
+            padding: 1vh 2vw;
+            border-radius: 0.6vw;
+            font-weight: bold;
+            transition: background 0.2s ease;
+            margin-bottom: 2vh;
+          }
+          
+          
 
 
         @media (max-width: 768px) {

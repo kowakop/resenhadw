@@ -238,3 +238,12 @@ body {
     cursor: pointer;
     font-size: 14px;
 }
+
+.user-card {
+    border: 1px solid lightblue;
+}
+
+.item-link:hover .user-card {
+    border-color: #0077cc;
+    box-shadow: 0 8px 25px rgba(0, 119, 204, 0.2);
+}

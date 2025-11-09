@@ -70,9 +70,10 @@ if (!isset($_SESSION['id'])) {
             echo "<a href='./index.php?url=$url'>";
             ?>
                 <img src="./fotos/logo.png" id="logo" style="height: 70px;">
-                <img src="./fotos/Resenhando.png" id="logo2" style="height: 80px; width: 250px;">
             </a>
         </div>
+        <hr>
+        <br>
 
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-home icon" viewBox="0 0 24 24" style="color: currentcolor;">
                     <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>

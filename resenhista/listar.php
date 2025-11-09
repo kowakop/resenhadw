@@ -47,6 +47,7 @@ $resultado = mysqli_query($conexao, $sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resenhistas</title>
+    <link rel="stylesheet" href="../listar.css">
 </head>
 <body>
     <div class="conteiner" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
@@ -64,13 +65,14 @@ $resultado = mysqli_query($conexao, $sql);
             $url = "resenhista/pagina.php?id=" . $usuario['usuario_id'];
             $url = urlencode($url);
 
-            echo '<a href="../index.php?url=' . $url . '" target="_top" style="text-decoration: none; color: black;">';
-            echo '<div class="resenha" style="border: 1px solid lightblue; padding: 20px; width: 250px; border-radius: 10px;">';
-            echo '<h3>' . htmlspecialchars($usuario['usuario_nick']) . '</h3>';
-            echo '<p><strong>Quantidade de resenhas publicadas:</strong> ' . $usuario['qtd_resenhas'] . '</p>';
-            echo '<p><strong>' . $usuario['qtd_favoritos'] . ' usuários favoritaram esse resenhista </p></strong>';
-            echo '</div>';
+            echo '<a href="../index.php?url=' . $url . '" target="_top" class="item-link">';
+            echo '  <div class="item-card user-card">';
+            echo '      <h3 class="item-title">' . htmlspecialchars($usuario['usuario_nick']) . '</h3>';
+            echo '      <p class="item-info"><strong>Quantidade de resenhas publicadas:</strong> ' . $usuario['qtd_resenhas'] . '</p>';
+            echo '      <p class="item-info"><strong>' . $usuario['qtd_favoritos'] . ' usuários favoritaram esse resenhista</strong></p>';
+            echo '  </div>';
             echo '</a>';
+            
         }
         ?>
     </div>
