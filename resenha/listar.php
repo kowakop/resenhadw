@@ -33,7 +33,7 @@ GROUP BY resenha_id
 
 
 if ($filtro == "data") {
-    $sql .= " ORDER BY resenha_data_nasc $ordem";
+    $sql .= " ORDER BY resenha_data $ordem";
 } else {
     if ($filtro == "favorito") {
         $sql .= " ORDER BY qtd_favoritos $ordem";
@@ -94,15 +94,22 @@ $resultado = mysqli_query($conexao, $sql);
             $url = "resenha/pagina.php?id=" . $resenha['resenha_id'];
             $url = urlencode($url);
 
-            echo '<a href="../index.php?url=' . $url . '" target="_top"' . '" style="text-decoration: none; color: black;">';
+            
+
+            $titulo_seguro = htmlspecialchars($resenha['resenha_titulo']);
+            $data_segura = htmlspecialchars($data);
+            $usuario_seguro = htmlspecialchars($resenha['usuario_nome']);
+            $obra_segura = htmlspecialchars($resenha['obra_nome']);
+            
+            echo '<a href="../index.php?url=' . $url_segura . '" target="_top" style="text-decoration: none; color: black;">';
             echo '<div class="resenha" style="border: 1px solid lightblue; padding: 20px; width: 250px; border-radius: 10px;">';
-            echo '<h3>' . $resenha['resenha_titulo'] . '</h3>';
-            echo '<p><strong>Data:</strong> ' . $data . '</p>';
-            echo '<p><strong>Autor da resenha:</strong> ' . $resenha['usuario_nome'] . '</p>';
-            echo '<p><strong>Obra:</strong> ' . $resenha['obra_nome'] . '</p>';
-            echo '<p>' . nl2br($resenha['resenha_conteudo']) . '</p>';
+            echo '<h3>' . $titulo_seguro . '</h3>';
+            echo '<p><strong>Data:</strong> ' . $data_segura . '</p>';
+            echo '<p><strong>Autor da resenha:</strong> ' . $usuario_seguro . '</p>';
+            echo '<p><strong>Obra:</strong> ' . $obra_segura . '</p>';
             echo '</div>';
             echo '</a>';
+            
         }
         ?>
     </div>

@@ -164,13 +164,20 @@ if ($linha_resenhas) {
     </style>
 </head>
 <body>
-  <?php
-        $url = "listar.php?objeto=resenhista";
-        $url = urlencode($url);
-        echo "<a href='../index.php?url=$url' class='link_menu' target='_top'>";
-        ?>
-        voltar</a>
-    <?php
+<?php 
+    $url = "../listar.php?objeto=resenhista";
+    if(isset($_GET["voltar"])) {
+        $voltar = $_GET["voltar"];
+        if ($voltar == "fav") {
+            $url = '../favoritos.php?objeto=re';
+        } else {
+            $url = "./listar.php?objeto=resenhista";
+        }        
+    }
+    $url = urlencode($url);
+
+    echo '<a href="../index.php?url=' . $url . '" target="_top">voltar</a>';
+
     if ($usuario = mysqli_fetch_assoc($resultados_user)) {
     $foto = $usuario['usuario_foto'];
     $arquivo = "../fotos/$foto";
@@ -182,7 +189,26 @@ if ($linha_resenhas) {
         echo "<div class='profile-container'>";
             echo"<div class='sidebar'>";
                 echo"<img src='$arquivo'>";
-                echo"<button>Favoritar</button>";
+
+                
+                $sql = "SELECT * FROM favorito WHERE favorito_usuario_id = ? AND favorito_id = ? AND lower(favorito_tipo) = 're'";
+                $comando = mysqli_prepare($conexao, $sql);
+                mysqli_stmt_bind_param($comando, 'ii', $id_user, $id);
+                mysqli_stmt_execute($comando);
+                $resultado = mysqli_stmt_get_result($comando);
+                
+                $favoritou = mysqli_fetch_assoc($resultado);
+                
+                if ($id_user != $id){
+                  if (!$favoritou) {
+
+                      echo "<button><a href='../favoritar.php?id=$id&objeto=re' class='botao'>favoritar</a></button>";
+                  } else {
+                      
+                      echo "<button><a href='../favoritar.php?id=$id&objeto=re' class='botao'>desfavoritar</a></button>";
+                  }
+                }
+
                 if ($_SESSION['tipo'] == 'admin' || $_SESSION['id'] == $usuario['usuario_id']) {
                   $url = "cadastro/index.php?id=" . $usuario['usuario_id'];
                   $url = urlencode($url);
@@ -196,9 +222,6 @@ if ($linha_resenhas) {
 
         echo"<div class='tabs'>";
             echo"  <div class='tab active'>Informações</div>";
-            echo"  <div class='tab'>Resenhas publicadas</div>";
-            echo"  <div class='tab'>Obras favoritas</div>";
-            echo"  <div class='tab'>Autores favoritos</div>";
         echo"</div>";
 
       echo"<div class='info-section'>";

@@ -60,7 +60,7 @@ if (isset($_SESSION['tipo'])) {
 
 <body>
   <h2>Nova resenha</h2>
-  <form action="salvar.php" method="post" enctype="multipart/form-data">
+  <form action="salvar.php?id=<?php echo $id; ?>" method="post" enctype="multipart/form-data">
 
     Obra Resenhada: <br>
     <select name="autor" required onchange="mostrar()" id="select">
@@ -74,7 +74,11 @@ if (isset($_SESSION['tipo'])) {
         $nome = $obraItem['obra_nome'];
         $id_obra = $obraItem['obra_id'];
         $foto = $obraItem['obra_foto'];
-
+        $arquivo = "../fotos/$foto";
+        if (!file_exists($arquivo) || !$foto) {
+            $foto = "padrao-obra.png"; 
+        }
+    
         echo "<option value='$id_obra' data-foto='$foto'";
         if ($id_obra == $obra) {
           echo " selected";

@@ -1,35 +1,40 @@
 <?php
 require_once "../conexao.php";
 require_once "../verificar_user.php";
-if ($_SESSION['tipo'] == "admin") {
-} else {
-    header("Location: ../index.php");
-}
-if (isset($_GET['id'])) {
 
+
+if (!isset($_SESSION['tipo'])) {
+    header("Location: ../index.php");
+    exit();
+}
+
+
+if ($_SESSION['tipo'] != "admin") {
+    header("Location: ../index.php");
+    exit();
+}
+
+
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    if (isset($_SESSION['tipo'])) {
-        if ($_SESSION['tipo'] == "admin" || $_SESSION['id'] == $id) {
+    $sql = "SELECT * FROM obra WHERE obra_id = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $id);
+    mysqli_stmt_execute($comando);
+    $resultados = mysqli_stmt_get_result($comando);
+    $obra = mysqli_fetch_assoc($resultados);
 
-
-            $sql = "SELECT * FROM obra WHERE obra_id = ?";
-            $comando = mysqli_prepare($conexao, $sql);
-
-            mysqli_stmt_bind_param($comando, 'i', $id);
-            mysqli_stmt_execute($comando);
-
-            $resultados = mysqli_stmt_get_result($comando);
-
-            $obra = mysqli_fetch_assoc($resultados);
-
-            $nome = $obra['obra_nome'];
-            $inicio = $obra['obra_data_inicio'];
-            $final = $obra['obra_data_final'];
-            $capitulo = $obra['obra_qtd_capitulos'];
-            $volume = $obra['obra_qtd_volumes'];
-            $autor_id = $obra['obra_autor_id'];
-        }
+    if ($obra) {
+        $nome = $obra['obra_nome'];
+        $inicio = $obra['obra_data_inicio'];
+        $final = $obra['obra_data_final'];
+        $capitulo = $obra['obra_qtd_capitulos'];
+        $volume = $obra['obra_qtd_volumes'];
+        $autor_id = $obra['obra_autor_id'];
+    } else {
+        header("Location: listar.php");
+        exit();
     }
 } else {
 
@@ -130,39 +135,39 @@ if (isset($_GET['id'])) {
     <div id="login">
         <h1>Cadastrar Obra</h1>
 
-        <form action="salvar.php" method="post" enctype="multipart/form-data">
+        <form action="salvar.php?id=<?php echo $id; ?>" method="post" enctype="multipart/form-data">
 
-            <!-- Nome da Obra -->
+ 
             <div class="form-group">
                 <label for="nome">Nome da Obra:</label>
                 <input type="text" id="nome" name="nome" required value="<?php echo $nome ?>" placeholder="Digite o nome da obra">
             </div>
 
-            <!-- Data de Início -->
+ 
             <div class="form-group">
                 <label for="inicio">Data de Início:</label>
                 <input type="date" id="inicio" name="inicio" required value="<?php echo $inicio ?>">
             </div>
 
-            <!-- Data de Término -->
+   
             <div class="form-group">
                 <label for="final">Data de Término:</label>
                 <input type="date" id="final" name="final" value="<?php echo $final ?>">
             </div>
 
-            <!-- Quantidade de Capítulos -->
+ 
             <div class="form-group">
                 <label for="qtd_cap">Quantidade de Capítulos:</label>
                 <input type="number" id="qtd_cap" name="qtd_cap" required value="<?php echo $capitulo ?>" placeholder="Informe a quantidade de capítulos">
             </div>
 
-            <!-- Quantidade de Volumes -->
+          
             <div class="form-group">
                 <label for="qtd_vol">Quantidade de Volumes:</label>
                 <input type="number" id="qtd_vol" name="qtd_vol" required value="<?php echo $volume ?>" placeholder="Informe a quantidade de volumes">
             </div>
 
-            <!-- Autor -->
+          
             <div class="form-group">
                 <label for="autor">Autor:</label>
                 <select name="autor" id="autor" required>
@@ -174,26 +179,28 @@ if (isset($_GET['id'])) {
                     $resultados = mysqli_stmt_get_result($comando);
 
                     while ($autor = mysqli_fetch_assoc($resultados)) {
-                        $nome = $autor['autor_nome'];
+                        $nome_autor = $autor['autor_nome'];
                         $id_autor = $autor['autor_id'];
 
                         echo "<option value='$id_autor'";
                         if ($id_autor == $autor_id) {
                             echo " selected";
                         }
-                        echo ">$nome</option>";
+                        echo ">$nome_autor</option>";
                     }
                     ?>
                 </select>
             </div>
 
-            <!-- Foto -->
+   
             <div class="form-group">
                 <label for="foto">Foto da Capa:</label>
                 <input type="file" id="foto" name="foto">
             </div>
 
-            <!-- Botão de Envio -->
+            <?php require_once "../erro_login.php"; ?>
+
+  
             <div class="form-group">
                 <button type="submit">Salvar Obra</button>
             </div>

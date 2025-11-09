@@ -14,23 +14,23 @@ $titulo = trim($_POST['titulo']);
 $conteudo = trim($_POST['conteudo']);
 $id_obra = isset($_POST['autor']) ? intval($_POST['autor']) : 0;
 
-// verificando essa bomba aí
+
 if ($titulo == "" || $conteudo == "" || $id_obra == 0) {
     header("Location: cadastrar.php?e=1");
     exit;
 }
 
-// avalia o tamanho do texto e manda erro
+
 if (strlen($titulo) > 100) {
     header("Location: cadastrar.php?e=2");
     exit;
 }
 
-// Se estiver editando
+
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($id == 0) {
-    // Inserção nova
+
     $sql = "INSERT INTO resenha (resenha_titulo, resenha_conteudo, resenha_usuario_id, resenha_obra_id)
             VALUES (?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);

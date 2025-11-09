@@ -24,6 +24,7 @@ if (isset($_GET['id'])) {
             $nascimento = $usuario['usuario_data_nasc'];
             $email = $usuario['usuario_email'];
             $senha = $usuario['usuario_senha'];
+            $editar_tipo = $usuario['usuario_tipo'];
 
         }
 
@@ -88,13 +89,19 @@ else {
 
             <?php 
             if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == "admin") {
-                echo "
-                Tipo de usuário:   
-                <select name='tipo' id=''>
-                    <option value='comum'>Comum</option>
-                    <option value='admin'>Admin</option>
-                </select> <br> <br>
-                ";
+            if ($_SESSION['nick'] == "admin") {
+                    echo "
+                    Tipo de usuário:   
+                    <select name='tipo' id=''>";
+                    echo "<option value='comum'>Comum</option> ";
+                    echo "<option value='admin'";
+                        if(isset($editar_tipo) && $editar_tipo == "admin") {
+                    echo " selected";
+                    } 
+                    echo">Admin</option>
+                    </select> <br> <br>
+                    ";
+                }
             }
             ?>
 

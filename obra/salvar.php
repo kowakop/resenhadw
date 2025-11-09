@@ -1,7 +1,8 @@
 <?php
 require_once "../conexao.php";
-// issets verifica se o valor existe caso contrario ele coloca nulo
-$id = isset($_POST['id']) ? $_POST['id'] : "";
+
+
+$id = $_GET['id'];
 $nome = isset($_POST['nome']) ? $_POST['nome'] : "";
 $data_inicio = isset($_POST['inicio']) ? $_POST['inicio'] : "";
 $data_final = isset($_POST['final']) ? $_POST['final'] : "";
@@ -16,52 +17,87 @@ $nome = trim($nome);
 // tempo atual
 $hoje = time();
 
-// validação
+
 if ($nome == "" || $data_inicio == "" || $qtd_capitulos == "" || $autor_id == "") {
-    header("Location: cadastrar.php?e=1"); // campos obrigatórios vazios
+    header("Location: cadastrar.php?e=1"); 
     exit;
 }
 
 if (strlen($nome) > 255) {
-    header("Location: cadastrar.php?e=2"); // nome muito grande
+    header("Location: cadastrar.php?e=2"); 
     exit;
 }
 
 if (!is_numeric($qtd_capitulos) || $qtd_capitulos <= 0) {
-    header("Location: cadastrar.php?e=3"); // qtd capítulos inválida
+    header("Location: cadastrar.php?e=3"); 
     exit;
 }
 
 if ($qtd_volumes != "" && (!is_numeric($qtd_volumes) || $qtd_volumes < 0)) {
-    header("Location: cadastrar.php?e=4"); // qtd volumes inválida
+    header("Location: cadastrar.php?e=4"); 
     exit;
 }
 
-if (!is_numeric($autor_id) || $autor_id <= 0) {
-    header("Location: cadastrar.php?e=5"); // autor inválido
+$tempo_inicio = strtotime($data_inicio);
+$tempo_final = !empty($data_final) ? strtotime($data_final) : 0;
+
+
+if ($tempo_inicio == false) {
+    header("Location: cadastrar.php?e=6");
     exit;
 }
 
-// upload de imagem
-$novo_nome = "padrao-obra.png";
+if ($data_final != "" && $tempo_final == false) {
+    header("Location: cadastrar.php?e=7"); 
+    exit;
+}
 
-if ($_FILES['foto']['error'] == UPLOAD_ERR_OK) {
+
+if ($tempo_inicio > time()) {
+    header("Location: cadastrar.php?e=8");
+    exit;
+}
+
+
+if ($tempo_final != 0 && $tempo_final > time()) {
+    header("Location: cadastrar.php?e=8"); 
+    exit;
+}
+
+if (!$autor_id || $autor_id <= 0) {
+    header("Location: cadastrar.php?e=5"); 
+    exit;
+}
+
+if (!empty($_FILES['foto']['name'])) {
     $nome_arquivo = $_FILES['foto']['name'];
     $caminho_temporario = $_FILES['foto']['tmp_name'];
-    $extensao = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION));
+
+
+    $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
 
     $extensoesValidas = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
 
-    if (in_array($extensao, $extensoesValidas)) {
-        $novo_nome = uniqid("obra_") . "." . $extensao;
+
+    if (in_array(strtolower($extensao), $extensoesValidas)) {
+
+        $novo_nome = uniqid() . "." . $extensao;
+
+
         $caminho_destino = "../fotos/" . $novo_nome;
 
+ 
         move_uploaded_file($caminho_temporario, $caminho_destino);
+
     } else {
-        header("Location: cadastrar.php?e=6"); // extensão inválida
-        exit;
+        header("Location: cadastrar.php");
     }
+} elseif ($id != 0) {
+    $sql_foto = mysqli_query($conexao, "SELECT obra_foto FROM obra WHERE obra_id = $id");
+    $dados_foto = mysqli_fetch_assoc($sql_foto);
+    $novo_nome = $dados_foto['obra_foto'];
 }
+
 
 // inserindo ou atualizando no banco
 if ($id == 0 || $id == "") {
@@ -83,6 +119,6 @@ if ($id == 0 || $id == "") {
 mysqli_stmt_execute($comando);
 mysqli_stmt_close($comando);
 
-header("Location: ../index.php?url=listar.php%3Fobjeto%3Dobra");
+header("Location: ../listar.php?objeto=obra");
 exit;
 ?>

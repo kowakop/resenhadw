@@ -75,8 +75,10 @@
             <select id='select' onchange="filtrar()" class="filtro-select">
                 <option value="alfabetica">Ordem alfabética</option>
                 <option value="data"><?php echo $op1; ?></option>
-                <option value="favorito">Nº de pessoas que favoritaram</option>
-                <?php if ($objeto == 'obra') { 
+                <?php if ($objeto != 'resenha') {
+                echo '<option value="favorito">Nº de pessoas que favoritaram</option>';
+                }
+                if ($objeto == 'obra') { 
                     echo $op2;
                 }?>
             </select>

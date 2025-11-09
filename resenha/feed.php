@@ -40,7 +40,7 @@ require_once "../conexao.php";
                 echo "<h3>" . htmlspecialchars($titulo) . "</h3>";
                 echo "<h4>" . htmlspecialchars($obra) . "</h4>";
                 echo "<p class='autor'>👤 " . htmlspecialchars($autor) . "</p>";
-                echo "<a href='pagina.php?id=" . urlencode($id) . "'>Ver mais</a>";
+                echo "<a href='../index.php?url=" . urlencode("./resenha/pagina.php?voltar=feed&id=$id") . "' target='_top'>Ver mais</a>";
                 echo "</div>";
             }
         } else {

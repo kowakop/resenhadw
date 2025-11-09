@@ -22,37 +22,46 @@
 
     if ($nome == "" || $email == "" || $senha == "" || $nascimento == "" || $nick == "") {
         header("Location: index.php?e=1");
+        exit();
     }
     
     if (strlen($nick) > 22) {
         header("Location: index.php?e=2");
+        exit();
     }
     
     if (strlen($senha) > 30) {
         header("Location: index.php?e=3");
+        exit();
     }
     
     if (strlen($email) > 254) {
         header("Location: index.php?e=4");
+        exit();
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         header("Location: index.php?e=5");
+        exit();
     }
 
     if ($tempo === false) {
         header("Location: index.php?e=6");
+        exit();
     } 
     elseif ($tempo > $hoje) {
         header("Location: index.php?e=7");
+        exit();
     } 
     
     elseif ($tempo < strtotime("1901-01-01")) {
         header("Location: index.php?e=8");
+        exit();
     }
 
     elseif (strlen($nome) > 70){
         header("Location: index.php?e=14");
+        exit();
     }
     if (isset($_POST['tipo']) && $_POST['tipo'] == "admin") {
         $tipo = "admin";
@@ -96,7 +105,7 @@
                 mysqli_stmt_execute($comando);
             } 
             
-            header("Location: ../resenhista/listar.php");
+            header("Location: ../listar.php?objeto=resenhista");
         }
 
     } else {
@@ -111,6 +120,7 @@
 
     if ($bd_dados) {
         header("Location: index.php?e=12");
+        exit();
     } 
 
     $sql = "SELECT usuario_id FROM usuario WHERE usuario_email = ?";
@@ -124,6 +134,7 @@
 
     if ($bd_dados) {
         header("Location: index.php?e=13");
+        exit();
     }
 
     $sql = "INSERT INTO usuario (usuario_nome, usuario_data_nasc, usuario_email, usuario_senha, usuario_nick, usuario_tipo) 
@@ -172,6 +183,7 @@
             mysqli_stmt_execute($comando);
         } else {
             header("Location: ./index.php?erro=15");
+            exit();
         }
     }
     

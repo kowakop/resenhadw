@@ -87,9 +87,40 @@ if (!isset($_SESSION['id'])) {
             <span class="texto_menu">Home</span>
         </a>
 
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="icon" style="color: currentcolor;">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-        </svg> <br> Salvos <br> blabla adicionar aqui <br> autores <br> resenhas <br> resenhistas salvos <br> ou seja mais tres links <br><br>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="icon" style="color: currentcolor;">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+            </svg>
+
+            <?php
+            // Obras favoritadas
+            $url = "favoritos.php?objeto=ob";
+            $url = urlencode($url);
+            echo "<a href='./index.php?url=$url' class='link_menu'>";
+            echo "<span class='texto_menu'>Obras salvas</span>";
+            echo "</a>";
+
+            // Autores favoritados
+            $url = "favoritos.php?objeto=au";
+            $url = urlencode($url);
+            echo "<a href='./index.php?url=$url' class='link_menu'>";
+            echo "<span class='texto_menu'>Autores salvos</span>";
+            echo "</a>";
+
+            // Resenhas curtidas
+            $url = "./resenha/liked.php";
+            $url = urlencode($url);
+            echo "<a href='./index.php?url=$url' class='link_menu'>";
+            echo "<span class='texto_menu'>Resenhas curtidas</span>";
+            echo "</a>";
+
+            // Resenhistas favoritadas
+            $url = "favoritos.php?objeto=re";
+            $url = urlencode($url);
+            echo "<a href='./index.php?url=$url' class='link_menu'>";
+            echo "<span class='texto_menu'>Resenhistas salvos</span>";
+            echo "</a>";
+            ?>
+
 
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon" style="color: currentcolor;">
                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 21 5-5m-4-4 8 8c3-3 1-5 1-5l6-6h2l-6-6v2l-6 6s-2-2-5 1"></path>
@@ -128,13 +159,6 @@ if (!isset($_SESSION['id'])) {
              <span class="texto_menu">Resenhistas</span>
         </a>
 
-        <?php
-        $url = "obra/index.php";
-        $url = urlencode($url);
-        echo "<a href='./index.php?url=$url' class='link_menu' >";
-        ?>
-             <span class="texto_menu">Pesquisar Mangás</span>
-        </a>
 
         <?php
         $url = "resenha/form_resenha.php";
@@ -143,6 +167,15 @@ if (!isset($_SESSION['id'])) {
         ?>
              <span class="texto_menu">Nova Resenha</span>
         </a>
+
+        <?php
+        $url = "resenhista/pagina.php?id=$id_user";
+        $url = urlencode($url);
+        echo "<a href='./index.php?url=$url' class='link_menu' >";
+        ?>
+             <span class="texto_menu">Meu Perfil</span>
+        </a>
+
 
 
         <hr>

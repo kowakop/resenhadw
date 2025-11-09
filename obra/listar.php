@@ -22,8 +22,8 @@ SELECT
     obra_data_final,
     obra_qtd_capitulos,
     obra_qtd_volumes,
+    obra_foto,
     autor.autor_nome,
-    autor.autor_foto,
     COUNT(DISTINCT favorito.favorito_id) AS qtd_favoritos
 FROM obra
 LEFT JOIN autor 
@@ -34,15 +34,12 @@ LEFT JOIN favorito
 GROUP BY obra.obra_id
 ";
 
-
 if ($filtro == "data") {
     $sql .= " ORDER BY obra.obra_data_inicio $ordem";
 } elseif ($filtro == "qtd") {
-    $ordem = ($ordem == "ASC") ? "DESC" : "ASC";
-    $sql .= " ORDER BY obra.obra_qtd_capitulos $ordem";
+    $sql .= " ORDER BY obra.obra_qtd_capitulos " . ($ordem == "ASC" ? "DESC" : "ASC");
 } elseif ($filtro == "favorito") {
-    $ordem = ($ordem == "ASC") ? "DESC" : "ASC";
-    $sql .= " ORDER BY qtd_favoritos $ordem";
+    $sql .= " ORDER BY qtd_favoritos " . ($ordem == "ASC" ? "DESC" : "ASC");
 } else {
     $sql .= " ORDER BY obra.obra_nome $ordem";
 }
@@ -52,99 +49,43 @@ $resultado = mysqli_query($conexao, $sql);
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Obras</title>
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px;
-        }
-
-        .obra {
-            border: 1px solid lightblue;
-            padding: 20px;
-            width: 240px;
-            text-align: center;
-            border-radius: 10px;
-            background-color: #f7faff;
-            transition: transform 0.2s;
-        }
-
-        .obra:hover {
-            transform: scale(1.05);
-        }
-
-        img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-
-        .obra p {
-            margin: 5px 0;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Obras</title>
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../listar.css">
 </head>
-
 <body>
 
-<div class="container">
+<div class="container lista-container">
 <?php
 while ($obra = mysqli_fetch_assoc($resultado)) {
-    //$foto = $obra["obra_foto"];
-    //$arquivo = "../fotos/$foto";
-    //if (!file_exists($arquivo) || !$foto) {
-    //    $arquivo = "../fotos/padrao-autor.png";
-    //}
-<div class="container">
-<?php
-    //while ($obra = mysqli_fetch_assoc($resultado)) {
-    // Verifica a capa da obra
-    //$capa = $obra["obra_capa"];
-    //$arquivo = "../fotos/$capa";
-    //if (!file_exists($arquivo) || !$capa) {
-        //$arquivo = "../fotos/padrao-obra.png"; // usa uma capa padrão se não houver 
+
+    $foto = $obra["obra_foto"];
+    $arquivo = "../fotos/$foto";
+    if (!file_exists($arquivo) || !$foto) {
+        $arquivo = "../fotos/padrao-obra.png"; 
     }
 
 
-            $inicio = date('d/m/Y', strtotime($obra["obra_data_inicio"]));
-            if ($obra["obra_data_final"]) {
-                $final = date('d/m/Y', strtotime($obra["obra_data_final"]));
-            } else {
-                $final = "Em andamento";
-            }
+    $inicio = date('d/m/Y', strtotime($obra["obra_data_inicio"]));
+    $final = $obra["obra_data_final"] ? date('d/m/Y', strtotime($obra["obra_data_final"])) : "Em andamento";
+
 
     $url = "obra/pagina.php?id=" . $obra['obra_id'];
-            $url = urlencode($url);
+    $url = urlencode($url);
 
-            echo '<a href="../index.php?url=' . $url . '" target="_top" class="item-link">';
-    echo '<div class="obra">';
-    //echo '<img src="' . htmlspecialchars($arquivo) . '" alt="Foto do autor">';
-    echo '<p><strong>' . htmlspecialchars($obra['obra_nome']) . '</strong></p>';
-    echo '<p>Autor: ' . htmlspecialchars($obra['autor_nome'] ?? 'Desconhecido') . '</p>';
-    echo '<p>Início: ' . htmlspecialchars($inicio) . '</p>';
-    echo '<p>Final: ' . htmlspecialchars($final) . '</p>';
-    echo '<p>Capítulos: ' . htmlspecialchars($obra['obra_qtd_capitulos']) . '</p>';
-    echo '<p>Volumes: ' . htmlspecialchars($obra['obra_qtd_volumes']) . '</p>';
-    echo '<p>' . htmlspecialchars($obra['qtd_favoritos']) . ' pessoas favoritaram</p>';
+    echo '<a href="../index.php?url=' . $url . '" target="_top" class="item-link">';
+    echo '<div class="item-card">';
+    echo '<img src="' . $arquivo . '" alt="foto da obra" class="item-image">';
+    echo '<h3 class="item-title">' . htmlspecialchars($obra['obra_nome']) . '</h3>';
+    echo '<p class="item-info">Autor: <span>' . htmlspecialchars($obra['autor_nome'] ?? 'Desconhecido') . '</span></p>';
+    echo '<p class="item-info">Início: <span>' . htmlspecialchars($inicio) . '</span></p>';
+    echo '<p class="item-info">Final: <span>' . htmlspecialchars($final) . '</span></p>';
+    echo '<p class="item-info">Capítulos: <span>' . htmlspecialchars($obra['obra_qtd_capitulos']) . '</span></p>';
+    echo '<p class="item-info">Volumes: <span>' . htmlspecialchars($obra['obra_qtd_volumes']) . '</span></p>';
+    echo '<p class="item-favoritos">' . htmlspecialchars($obra['qtd_favoritos']) . ' pessoas favoritaram essa obra</p>';
     echo '</div>';
     echo '</a>';
 }
@@ -152,5 +93,4 @@ while ($obra = mysqli_fetch_assoc($resultado)) {
 </div>
 
 </body>
-
 </html>

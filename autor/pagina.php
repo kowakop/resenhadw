@@ -60,8 +60,17 @@ $qtd_resenhas = mysqli_fetch_assoc($resultados_resenhas)['qtd_resenhas'];
 
 <body>
     <?php
-        $url = "listar.php?objeto=autor";
-        $url = urlencode($url);
+    $url = "../listar.php?objeto=autor";
+    if(isset($_GET["voltar"])) {
+        $voltar = $_GET["voltar"];
+        if ($voltar == "fav") {
+            $url = '../favoritos.php?objeto=au';
+        } else {
+            $url = "../listar.php?objeto=autor";
+        }       
+
+    }
+    $url = urlencode($url);
         echo "<a href='../index.php?url=$url' class='link_menu' target='_top'>";
         ?>voltar</a>
     <?php
@@ -97,8 +106,23 @@ $qtd_resenhas = mysqli_fetch_assoc($resultados_resenhas)['qtd_resenhas'];
         echo "<p>Favoritos: $qtd_favoritos</p>";
         echo "<p>Obras: $qtd_obras</p>";
         echo "<p>Resenhas: $qtd_resenhas</p>";
+        $sql = "SELECT * FROM favorito WHERE favorito_usuario_id = ? AND favorito_id = ? AND lower(favorito_tipo) = 'au'";
+                $comando = mysqli_prepare($conexao, $sql);
+                mysqli_stmt_bind_param($comando, 'ii', $id_user, $id);
+                mysqli_stmt_execute($comando);
+                $resultado = mysqli_stmt_get_result($comando);
+                
+                $favoritou = mysqli_fetch_assoc($resultado);
+                
+                if (!$favoritou) {
+
+                    echo "<a href='../favoritar.php?id=$id&objeto=au' class='botao'>favoritar</a>";
+                } else {
+                    
+                    echo "<a href='../favoritar.php?id=$id&objeto=au' class='botao'>desfavoritar</a>";
+                }
         if ($tipo == "admin") {
-            echo "<a href='cadastrar.php?id=$id'>editar</a>";
+            echo "<br><a href='cadastrar.php?id=$id'>editar</a>";
         }
         echo "</div>";
     } else {
