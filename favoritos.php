@@ -91,7 +91,7 @@ echo "<h2>$titulo</h2>";
 echo "<div class='container'>";
     while ($fav = mysqli_fetch_assoc($resultado)) {
         $foto = $fav['foto'];
-        $arquivo = "../fotos/$foto";
+        $arquivo = "./fotos/$foto";
         $nome = $fav['nome'];
         $fav_id = $fav['id'];
         
