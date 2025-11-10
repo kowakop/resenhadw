@@ -23,38 +23,42 @@
 
     if ($nome == "" || $data_nasc == "") {
     header("Location: cadastrar.php?e=1");
+    exit();
     }
 
     if ($tempo_nasc == false) {
         header("Location: cadastrar.php?e=6");
-    } 
-
+        exit();
+    }
     elseif ($tempo_nasc > $hoje) {
         header("Location: cadastrar.php?e=7");
+        exit();
     }
 
-    elseif (strlen($nome) > 70){
-        header("Location: cadastrar.php?e=14");
-    }
 
-    // condição em caso o autor esteja morto
-
-    if ($autor_morto  == "sim") {
-
-        if ($nome == "" || $data_nasc == "") {
-            header("Location: cadastrar.php?e=1");
-        }
-
+    if ($autor_morto == "sim") {
         if ($tempo_morte == false) {
-            header("Location: cadastrar.php?e=6");
-        } 
-
-        elseif ($tempo_morte > $hoje) {
-            header("Location: cadastrar.php?e=7");
+            header("Location: cadastrar.php?e=9");
+            exit();
         }
-    } 
+        elseif ($tempo_morte > $hoje) {
+            header("Location: cadastrar.php?e=10");
+            exit();
+        }
+        elseif ($tempo_morte <= $tempo_nasc) {
+            header("Location: cadastrar.php?e=11");
+            exit();
+        }
 
-    else {
+        // mínimo de 5 anos
+        $cinco_anos = 5 * 365 * 24 * 60 * 60;
+
+        if ($tempo_morte != 0 && ($tempo_morte - $tempo_nasc) < ($cinco_anos)) {
+            header("Location: cadastrar.php?e=10"); 
+            exit;
+        }
+        
+    } else {
         $data_morte = NULL;
     }
 

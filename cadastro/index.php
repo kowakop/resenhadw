@@ -24,6 +24,7 @@ if (isset($_GET['id'])) {
             $nascimento = $usuario['usuario_data_nasc'];
             $email = $usuario['usuario_email'];
             $senha = $usuario['usuario_senha'];
+            $editar_tipo = $usuario['usuario_tipo'];
 
         }
 
@@ -50,67 +51,79 @@ else {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Usuário</title>
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon.ico"
+    type="image/x-icon">
+    <link rel="stylesheet" href="../style.css">
 </head>
-<body>
-<form action="saida.php?id=<?php echo $id; ?>" method='POST' enctype="multipart/form-data">
-    Nickname:<br>
-    <input type="text" name="nick" required placeholder='Nome único' 
-           value="<?php echo $nick; ?>">
-    <br><br> 
+<body id="cadastro">
 
-    Nome: <br>
-    <input type="text" name="nome" required placeholder='Seu nome'
-           value="<?php echo $nome; ?>">
-    <br><br>
+    <div class="container_cadastro">
+        <div class="form-section">
+            <form action="saida.php?id=<?php echo $id; ?>" method='POST' enctype="multipart/form-data">
 
-    Data de nascimento:
-    <br>
-    <input type="date" name="nascimento" required 
-           value="<?php echo $nascimento; ?>">
-    <br><br>
+            <h2>Aréa de Cadastro</h2>
 
-    E-mail:
-    <br>
-    <input type="text" name="email" placeholder="Informe o seu Email" required 
-           value="<?php echo $email; ?>">
-    <br><br>
+            Nickname:
+            <input type="text" name="nick" id="nick" placeholder='Nome único' 
+                   value="<?php echo $nick; ?>">
+
+            Nome:
+            <input type="text" name="nome" id="nome" required placeholder='Seu nome'
+                   value="<?php echo $nome; ?>">
+
+            Data de nascimento:
+
+            <input type="date" name="nascimento" id="nascimento" 
+                   value="<?php echo $nascimento; ?>">
+
+            E-mail:
+
+            <input type="text" name="email" id="email" placeholder="Informe o seu Email" required 
+                   value="<?php echo $email; ?>">
     
-    Digite sua senha:
-    <br>
-    <input type="password" name="senha" id="senha" required 
-           value="<?php echo $senha; ?>"> 
-    <br>
-    <input type="checkbox" id="mostrar_senha"><span>mostra senha</span> 
-    <br><br> 
-    <?php 
-    if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == "admin") {
-        echo "
-        Tipo de usuário:   
-        <select name='tipo' id=''>
-            <option value='comum'>Comum</option>
-            <option value='admin'>Admin</option>
-        </select> <br> <br>
-        ";
-    }
-    ?>
-    
-    Selecione sua foto de perfil:
-    <br>
-    <input type="file" name="foto">
+            Digite sua senha:
 
-    <br><br>
+            <input type="password" name="senha" id="senha" required 
+                   value="<?php echo $senha; ?>"> 
+            <input type="checkbox" id="mostrar_senha"><span>mostra senha</span> 
+
+            <?php 
+            if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == "admin") {
+            if ($_SESSION['nick'] == "admin") {
+                    echo "
+                    Tipo de usuário:   
+                    <select name='tipo' id=''>";
+                    echo "<option value='comum'>Comum</option> ";
+                    echo "<option value='admin'";
+                        if(isset($editar_tipo) && $editar_tipo == "admin") {
+                    echo " selected";
+                    } 
+                    echo">Admin</option>
+                    </select> <br> <br>
+                    ";
+                }
+            }
+            ?>
+            <br>
+            <br>
+            Selecione sua foto de perfil:
+
+            <input type="file" name="foto">
+            <br>
+            <br>
+
+            <input type="submit" value="Salvar" id="submeter">
 
 
 
-    <input type="submit" value="Salvar">
-    <br><br>
-    
+            <?php
+            require_once "../erro_login.php";
+            ?>
+            </div>
+        </form>
+    </div>
 
-    <?php
-    require_once "../erro_login.php";
-    ?>
-    </form>
+
     <script> 
          // puxa os elementos por id
          const senhaInput = document.getElementById('senha');

@@ -15,8 +15,8 @@ $resultados_user = mysqli_stmt_get_result($stmt);
 
 //favoritos
 $sql = "SELECT COUNT(*) AS qtd_favoritos 
-           FROM favorito 
-           WHERE favorito_usuario_id = ? AND favorito_tipo = 're'";
+        FROM favorito 
+        WHERE favorito_id = ? AND favorito_tipo = 're'";
 $stmt = mysqli_prepare($conexao, $sql);
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
@@ -27,9 +27,7 @@ $qtd_favoritos = mysqli_fetch_assoc($resultados_fav)['qtd_favoritos'];
 //resenhas
 $sql = "SELECT COUNT(resenha_id) AS qtd_resenhas 
                FROM resenha 
-               INNER JOIN obra o ON resenha_obra_id = obra_id
-               WHERE obra_autor_id = ?
-               group by resenha_id";
+               WHERE resenha_usuario_id = ?";
 $stmt = mysqli_prepare($conexao, $sql);
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
@@ -49,12 +47,13 @@ if ($linha_resenhas) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página do Resenhista</title>
-    <style>
-        body {
+<style>
+
+    body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
+      background: #fff; /* Fundo branco */
+      color: #111;      /* Texto escuro */
     }
 
     .header {
@@ -67,7 +66,8 @@ if ($linha_resenhas) {
       display: flex;
       gap: 30px;
       padding: 20px 40px;
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: #fff; /* container branco */
+      color: #111;            /* texto escuro */
     }
 
     .sidebar {
@@ -82,14 +82,14 @@ if ($linha_resenhas) {
       width: 130px;
       height: 130px;
       border-radius: 50%;
-      border: 3px solid #333;
+      border: 3px solid #ccc; /* borda mais clara */
     }
 
     .sidebar button {
       width: 100%;
-      background: #222;
+      background: #eee;       /* botão claro */
       border: none;
-      color: #fff;
+      color: #111;
       padding: 10px;
       border-radius: 6px;
       cursor: pointer;
@@ -97,7 +97,7 @@ if ($linha_resenhas) {
     }
 
     .sidebar button:hover {
-      background: #333;
+      background: #ddd;
     }
 
     .content {
@@ -107,6 +107,7 @@ if ($linha_resenhas) {
     .username {
       font-size: 2rem;
       font-weight: bold;
+      color: #111;
     }
 
     .tabs {
@@ -116,15 +117,16 @@ if ($linha_resenhas) {
     }
 
     .tab {
-      background: #222;
+      background: #eee;
       padding: 6px 14px;
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
+      color: #111;
     }
 
     .tab.active {
-      background: #444;
+      background: #ccc;
     }
 
     .info-section {
@@ -136,43 +138,63 @@ if ($linha_resenhas) {
     }
 
     .info-label {
-      color: #bbb;
+      color: #555;
       display: block;
       font-size: 0.9rem;
     }
 
     .info-value {
       font-weight: bold;
+      color: #111;
     }
 
     .connection-bar {
-      background: #222;
+      background: #f5f5f5;
       border-radius: 6px;
       padding: 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 20px;
+      color: #111;
     }
 
     .connection-bar a {
-      color: #aaa;
+      color: #111;
       text-decoration: none;
     }
 
     .connection-bar a:hover {
-      color: #fff;
+      color: #333;
     }
-    </style>
+    .voltar {
+      display: inline-block;
+    background: #0077cc;
+    color: #fff;
+    text-decoration: none;
+    padding: 1vh 2vw;
+    border-radius: 0.6vw;
+    font-size: 1.8vh;
+    transition: background 0.2s ease;
+    }
+</style>
+
 </head>
 <body>
-  <?php
-        $url = "listar.php?objeto=resenhista";
-        $url = urlencode($url);
-        echo "<a href='../index.php?url=$url' class='link_menu' target='top'>";
-        ?>
-        voltar</a>
-    <?php
+<?php 
+    $url = "../listar.php?objeto=resenhista";
+    if(isset($_GET["voltar"])) {
+        $voltar = $_GET["voltar"];
+        if ($voltar == "fav") {
+            $url = '../favoritos.php?objeto=re';
+        } else {
+            $url = "./listar.php?objeto=resenhista";
+        }        
+    }
+    $url = urlencode($url);
+
+    echo '<a href="../index.php?url=' . $url . '" target="_top" class="voltar">voltar</a>';
+
     if ($usuario = mysqli_fetch_assoc($resultados_user)) {
     $foto = $usuario['usuario_foto'];
     $arquivo = "../fotos/$foto";
@@ -184,11 +206,30 @@ if ($linha_resenhas) {
         echo "<div class='profile-container'>";
             echo"<div class='sidebar'>";
                 echo"<img src='$arquivo'>";
-                echo"<button>Favoritar</button>";
+
+                
+                $sql = "SELECT * FROM favorito WHERE favorito_usuario_id = ? AND favorito_id = ? AND lower(favorito_tipo) = 're'";
+                $comando = mysqli_prepare($conexao, $sql);
+                mysqli_stmt_bind_param($comando, 'ii', $id_user, $id);
+                mysqli_stmt_execute($comando);
+                $resultado = mysqli_stmt_get_result($comando);
+                
+                $favoritou = mysqli_fetch_assoc($resultado);
+                
+                if ($id_user != $id){
+                  if (!$favoritou) {
+
+                      echo "<button><a href='../favoritar.php?id=$id&objeto=re' class='botao'>favoritar</a></button>";
+                  } else {
+                      
+                      echo "<button><a href='../favoritar.php?id=$id&objeto=re' class='botao'>desfavoritar</a></button>";
+                  }
+                }
+
                 if ($_SESSION['tipo'] == 'admin' || $_SESSION['id'] == $usuario['usuario_id']) {
                   $url = "cadastro/index.php?id=" . $usuario['usuario_id'];
                   $url = urlencode($url);
-                  echo "<button><a href='../index.php?url=" . $url . "' target='_top'>Editar perfil </button></a>";
+                  echo "<button><a href='../index.php?url=" . $url . "' target='_top'>Editar perfil</a></button>";
                 }
             echo"</div>";
 
@@ -198,9 +239,6 @@ if ($linha_resenhas) {
 
         echo"<div class='tabs'>";
             echo"  <div class='tab active'>Informações</div>";
-            echo"  <div class='tab'>Resenhas publicadas</div>";
-            echo"  <div class='tab'>Obras favoritas</div>";
-            echo"  <div class='tab'>Autores favoritos</div>";
         echo"</div>";
 
       echo"<div class='info-section'>";
@@ -223,25 +261,13 @@ if ($linha_resenhas) {
         echo"</div>";
 
         echo"<div class='info-item'>";
-            echo"  <span class='info-label'>Usuários que favoritaram " . ($usuario['usuario_nick']) . "</span>";
-            echo"  <span class='info-value'>$qtd_resenhas</span>";
+            echo"  <span class='info-label'>Usuários que favoritaram " . htmlspecialchars($usuario['usuario_nick']) . ":</span>";
+            echo"  <span class='info-value'>$qtd_favoritos</span>";
         echo"</div>";
+
       echo"</div>";
     echo"</div>";
   echo"</div>";
-
-        //echo "<img src='$arquivo'>";
-        //echo "<h1>" . htmlspecialchars($usuario['usuario_nome']) . "</h1>";
-        //echo "<p><span>Data de nascimento:</span> " . date('d/m/Y', strtotime($usuario['usuario_data_nasc'])) . "</span></p>";
-        //echo "<p>Favoritos: $qtd_favoritos</p>";
-        //echo "<p>Resenhas: $qtd_resenhas</p>";
-        //if ($tipo == "comum") {
-        //    echo "<a href='cadastrar.php?id=$id'>editar</a>";
-        //}
-        //echo "</div>";
-    //} else {
-    //    echo "Autor não encontrado.";
-    //}
 
     if (!isset($_SESSION['id']) || !isset($_SESSION['tipo'])) {
     header("Location: ../index.php");

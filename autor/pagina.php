@@ -56,17 +56,29 @@ $qtd_resenhas = mysqli_fetch_assoc($resultados_resenhas)['qtd_resenhas'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../style-paginas.css">
 </head>
 
-<body>
-    <a href="../listar.php?objeto=autor">voltar</a>
+<body class="pagina-autor">
     <?php
+    $url = "../listar.php?objeto=autor";
+    if(isset($_GET["voltar"])) {
+        $voltar = $_GET["voltar"];
+        if ($voltar == "fav") {
+            $url = '../favoritos.php?objeto=au';
+        } else {
+            $url = "../listar.php?objeto=autor";
+        }       
+    }
+    $url = urlencode($url);
+    echo "<a href='../index.php?url=$url' class='link_menu' target='_top'>voltar</a>";
+    ?>
 
+    <div class="autor-container">
+    <?php
     if ($autor = mysqli_fetch_assoc($resultados_autor)) {
         $morte = $autor['autor_data_morte'];
         $foto = $autor['autor_foto'];
-
-
 
         if ($morte != null) {
             $morte = strtotime($autor["autor_data_morte"]);
@@ -78,29 +90,45 @@ $qtd_resenhas = mysqli_fetch_assoc($resultados_resenhas)['qtd_resenhas'];
         } else {
             $morte = "<span>Vivo</span>";
         }
-        $arquivo = "../fotos/$foto";
 
+        $arquivo = "../fotos/$foto";
         if (!file_exists($arquivo) || $foto == null) {
             $arquivo = "../fotos/padrao-autor.png";
         }
 
+        echo "<div class='autor-card'>";
+        echo "<img src='$arquivo' alt='Foto do autor' class='autor-foto'>";
+        echo "<h1 class='autor-nome'>" . htmlspecialchars($autor['autor_nome']) . "</h1>";
+        echo "<p class='autor-info'><span>Data de nascimento:</span> " . date('d/m/Y', strtotime($autor['autor_data_nasc'])) . "</p>";
+        echo "<p class='autor-info'>$morte</p>";
+        echo "<p class='autor-stats'>Favoritos: $qtd_favoritos</p>";
+        echo "<p class='autor-stats'>Obras: $qtd_obras</p>";
+        echo "<p class='autor-stats'>Resenhas: $qtd_resenhas</p>";
 
-        echo "<div class='autor'>";
-        echo "<img src='$arquivo'>";
-        echo "<h1>" . htmlspecialchars($autor['autor_nome']) . "</h1>";
-        echo "<p><span>Data de nascimento:</span> " . date('d/m/Y', strtotime($autor['autor_data_nasc'])) . "</span></p>";
-        echo "<p><span>" . $morte . "</p>";
-        echo "<p>Favoritos: $qtd_favoritos</p>";
-        echo "<p>Obras: $qtd_obras</p>";
-        echo "<p>Resenhas: $qtd_resenhas</p>";
-        if ($tipo == "admin") {
-            echo "<a href='cadastrar.php?id=$id'>editar</a>";
+        $sql = "SELECT * FROM favorito WHERE favorito_usuario_id = ? AND favorito_id = ? AND lower(favorito_tipo) = 'au'";
+        $comando = mysqli_prepare($conexao, $sql);
+        mysqli_stmt_bind_param($comando, 'ii', $id_user, $id);
+        mysqli_stmt_execute($comando);
+        $resultado = mysqli_stmt_get_result($comando);
+        $favoritou = mysqli_fetch_assoc($resultado);
+
+        if (!$favoritou) {
+            echo "<a href='../favoritar.php?id=$id&objeto=au' class='botao'>favoritar</a>";
+        } else {
+            echo "<a href='../favoritar.php?id=$id&objeto=au' class='botao'>desfavoritar</a>";
         }
+
+        if ($tipo == 'admin') {
+            echo "<br><a href='cadastrar.php?id=$id' class='link-editar'>editar</a>";
+        }
+
         echo "</div>";
     } else {
-        echo "Autor não encontrado.";
+        echo "<p class='autor-erro'>Autor não encontrado.</p>";
     }
     ?>
+    </div>
 </body>
+
 
 </html>
