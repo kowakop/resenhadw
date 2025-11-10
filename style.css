@@ -28,7 +28,7 @@
 }
 
 .link_menu :hover {
-    background-color: aqua;
+    background-color: rgba(245, 103, 51, 0.805);
 }
 
 /* CSS LOGIN */
@@ -176,3 +176,8 @@
                 height: 200px;
             }
         }
+
+
+        /* CSS CONTATOS DEV */
+
+        /* ---------- Estilos gerais ---------- */

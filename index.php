@@ -197,9 +197,9 @@ if (!isset($_SESSION['id'])) {
         ?>
 
         <hr>
-        <a href="./devs/about.html" class="link_menu" target="principal">Sobre Nós</a>
-        <a href="./devs/contato.html" class="link_menu" target="principal">Contate-nos</a>
-        <a href="./devs/termos.html" class="link_menu" target="principal">Termos</a>
+        <a href="./devs/about.php" class="link_menu" target="principal">Sobre Nós</a>
+        <a href="./devs/contato.php" class="link_menu" target="principal">Contate-nos</a>
+        <a href="./devs/termos.php" class="link_menu" target="principal">Termos</a>
         <a href="./login/deslogar.php" class="link_menu"> Sair</a>
     </div>
 

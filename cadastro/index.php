@@ -61,7 +61,7 @@ else {
         <div class="form-section">
             <form action="saida.php?id=<?php echo $id; ?>" method='POST' enctype="multipart/form-data">
 
-            <h2>Aréa de Cadastro</h2>
+            <h2>Área de Cadastro</h2>
 
             Nickname:
             <input type="text" name="nick" id="nick" placeholder='Nome único' 
@@ -85,12 +85,12 @@ else {
 
             <input type="password" name="senha" id="senha" required 
                    value="<?php echo $senha; ?>"> 
-            <input type="checkbox" id="mostrar_senha"><span>mostra senha</span> 
+            <input type="checkbox" id="mostrar_senha"><span> mostrar senha</span> 
 
             <?php 
             if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == "admin") {
             if ($_SESSION['nick'] == "admin") {
-                    echo "
+                    echo " <br><br>
                     Tipo de usuário:   
                     <select name='tipo' id=''>";
                     echo "<option value='comum'>Comum</option> ";
@@ -99,7 +99,7 @@ else {
                     echo " selected";
                     } 
                     echo">Admin</option>
-                    </select> <br> <br>
+                    </select> <br>
                     ";
                 }
             }
